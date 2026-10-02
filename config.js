@@ -1,7 +1,7 @@
 window.JJAEYUL_CONFIG = {
   // Supabase 프로젝트 Settings > API 에서 복사
-  SUPABASE_URL: "https://YOUR_PROJECT_ID.supabase.co",
-  SUPABASE_ANON_KEY: "YOUR_SUPABASE_ANON_KEY",
+  SUPABASE_URL: "https://srcnluxzjulniixbyhmq.supabase.co",
+  SUPABASE_ANON_KEY: "sb_publishable_qRWCdUybViauDK_q5ENuag_55yaT3rW",
 
   // 째율부동산 기본정보
   PHONE: "01091651622",
