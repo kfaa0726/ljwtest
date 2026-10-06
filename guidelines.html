@@ -1,0 +1,705 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#ffffff">
+<title>시행요강 | 2026 KOSAC</title>
+
+<style>
+:root{
+  --bg:#f6f8fb;
+  --card:#ffffff;
+  --text:#111827;
+  --muted:#6b7280;
+  --line:#e5e7eb;
+  --navy:#173a6f;
+  --blue:#315b9e;
+  --blue2:#5f7fb7;
+  --soft:#eef4fb;
+  --soft2:#f8fafc;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Noto Sans KR","Segoe UI",sans-serif;
+  word-break:keep-all;
+}
+a{text-decoration:none;color:inherit}
+.wrap{width:min(1180px,calc(100% - 36px));margin:auto}
+
+/* header */
+header{
+  position:sticky;
+  top:0;
+  z-index:30;
+  background:rgba(255,255,255,.94);
+  border-bottom:1px solid var(--line);
+  backdrop-filter:blur(14px);
+}
+.nav{
+  min-height:84px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px;
+}
+.brand-row{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+.logo img{
+  display:block;
+  width:186px;
+  height:auto;
+}
+.socials{display:flex;gap:7px}
+.social{
+  width:36px;height:36px;
+  border:1px solid var(--line);
+  border-radius:10px;
+  background:#fff;
+  display:grid;
+  place-items:center;
+  transition:.18s ease;
+}
+.social:hover{transform:translateY(-1px);box-shadow:0 6px 16px rgba(15,23,42,.08)}
+.social svg{width:18px;height:18px}
+.menu{
+  display:flex;
+  align-items:center;
+  gap:26px;
+  font-size:14px;
+  font-weight:800;
+  color:#465162;
+}
+.menu a:hover{color:var(--blue)}
+
+.menu-toggle{
+  display:none;
+  align-items:center;
+  justify-content:center;
+  gap:7px;
+  min-height:40px;
+  padding:0 13px;
+  border:1px solid var(--line);
+  border-radius:11px;
+  background:#fff;
+  color:#263244;
+  font-size:13px;
+  font-weight:900;
+}
+.menu-toggle .bars{
+  width:17px;
+  height:12px;
+  position:relative;
+  display:inline-block;
+}
+.menu-toggle .bars:before,
+.menu-toggle .bars:after,
+.menu-toggle .bars span{
+  content:"";
+  position:absolute;
+  left:0;
+  width:100%;
+  height:2px;
+  border-radius:2px;
+  background:#263244;
+}
+.menu-toggle .bars:before{top:0}
+.menu-toggle .bars span{top:5px}
+.menu-toggle .bars:after{bottom:0}
+
+/* hero */
+.hero{
+  padding:76px 0 54px;
+}
+.hero-card{
+  position:relative;
+  overflow:hidden;
+  border:1px solid #e4eaf2;
+  border-radius:30px;
+  background:linear-gradient(135deg,#ffffff 0%,#f4f7fb 62%,#eaf1fa 100%);
+  padding:62px 58px;
+}
+.hero-card:after{
+  content:"";
+  position:absolute;
+  right:-80px;
+  top:-90px;
+  width:320px;
+  height:320px;
+  border-radius:50%;
+  background:rgba(49,91,158,.08);
+}
+.eyebrow{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  font-size:12px;
+  font-weight:900;
+  letter-spacing:.14em;
+  color:var(--blue);
+}
+.hero h1{
+  margin:13px 0 18px;
+  font-size:clamp(42px,6vw,72px);
+  line-height:1.05;
+  letter-spacing:-.065em;
+}
+.hero-lead{
+  max-width:820px;
+  margin:0;
+  color:#4b5563;
+  font-size:19px;
+  line-height:1.85;
+  font-weight:650;
+}
+.hero-sub{
+  max-width:860px;
+  margin:18px 0 0;
+  color:#6b7280;
+  font-size:15px;
+  line-height:1.9;
+}
+
+/* sections */
+.section{padding:28px 0 70px}
+.section-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-end;
+  gap:24px;
+  margin-bottom:24px;
+}
+.section-head small{
+  display:block;
+  margin-bottom:6px;
+  color:var(--blue);
+  font-size:11px;
+  font-weight:900;
+  letter-spacing:.12em;
+}
+.section-head h2{
+  margin:0;
+  font-size:34px;
+  letter-spacing:-.05em;
+}
+.section-head p{
+  margin:0;
+  max-width:600px;
+  color:var(--muted);
+  font-size:13px;
+  line-height:1.7;
+  text-align:right;
+}
+
+/* feature grid */
+.features{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:14px;
+}
+.feature{
+  min-height:230px;
+  padding:25px;
+  border:1px solid var(--line);
+  border-radius:22px;
+  background:#fff;
+  transition:.18s ease;
+}
+.feature:hover{
+  transform:translateY(-2px);
+  box-shadow:0 12px 30px rgba(15,23,42,.06);
+}
+.feature-num{
+  width:36px;height:36px;
+  display:grid;place-items:center;
+  margin-bottom:25px;
+  border-radius:11px;
+  background:var(--soft);
+  color:var(--blue);
+  font-size:12px;
+  font-weight:950;
+}
+.feature h3{
+  margin:0;
+  font-size:20px;
+  line-height:1.45;
+  letter-spacing:-.035em;
+}
+.feature p{
+  margin:11px 0 0;
+  color:#6b7280;
+  font-size:13px;
+  line-height:1.75;
+}
+
+/* background */
+.reason-list{
+  display:grid;
+  gap:12px;
+}
+.reason{
+  display:grid;
+  grid-template-columns:66px minmax(0,1fr);
+  gap:22px;
+  padding:27px 28px;
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:20px;
+}
+.reason-no{
+  width:52px;height:52px;
+  display:grid;place-items:center;
+  border-radius:16px;
+  background:var(--navy);
+  color:#fff;
+  font-size:16px;
+  font-weight:900;
+}
+.reason h3{
+  margin:1px 0 9px;
+  font-size:19px;
+  line-height:1.5;
+  letter-spacing:-.03em;
+}
+.reason p{
+  margin:0;
+  color:#667085;
+  font-size:14px;
+  line-height:1.85;
+}
+
+/* overview */
+.overview{
+  display:grid;
+  grid-template-columns:1.05fr .95fr;
+  gap:16px;
+}
+.overview-card{
+  padding:30px;
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:22px;
+}
+.overview-card.dark{
+  background:#17243a;
+  color:#fff;
+  border-color:#17243a;
+}
+.badge{
+  display:inline-flex;
+  padding:7px 10px;
+  border-radius:999px;
+  background:var(--soft);
+  color:var(--blue);
+  font-size:10px;
+  font-weight:900;
+}
+.dark .badge{
+  background:rgba(255,255,255,.12);
+  color:#fff;
+}
+.overview-card h3{
+  margin:14px 0 18px;
+  font-size:27px;
+  letter-spacing:-.04em;
+}
+.info-row{
+  display:grid;
+  grid-template-columns:90px 1fr;
+  gap:12px;
+  padding:12px 0;
+  border-top:1px solid #edf0f4;
+  font-size:14px;
+  line-height:1.7;
+}
+.dark .info-row{border-top-color:rgba(255,255,255,.12)}
+.info-row strong{font-size:12px;color:#667085}
+.dark .info-row strong{color:#b9c5d6}
+.info-row span{color:#303947}
+.dark .info-row span{color:#f5f7fb}
+.note{
+  margin-top:18px;
+  color:#8992a0;
+  font-size:11px;
+  line-height:1.7;
+}
+.dark .note{color:#aeb9c8}
+
+/* contact */
+.contact{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:16px;
+}
+.contact-card{
+  padding:28px;
+  border:1px solid var(--line);
+  border-radius:22px;
+  background:#fff;
+}
+.contact-card h3{
+  margin:0 0 18px;
+  font-size:22px;
+  letter-spacing:-.04em;
+}
+.contact-row{
+  display:grid;
+  grid-template-columns:76px 1fr;
+  gap:14px;
+  padding:10px 0;
+  border-top:1px solid #eef1f4;
+  font-size:13px;
+  line-height:1.65;
+}
+.contact-row:first-of-type{border-top:0}
+.contact-row strong{color:#7b8491;font-size:11px}
+.hosts{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+}
+.host{
+  padding:20px;
+  border-radius:16px;
+  background:var(--soft2);
+  border:1px solid #edf0f3;
+}
+.host small{display:block;color:#8b95a3;font-size:10px;font-weight:900}
+.host strong{display:block;margin-top:5px;font-size:17px}
+
+/* footer */
+footer{
+  margin-top:12px;
+  border-top:1px solid var(--line);
+  background:#fff;
+}
+.footer-inner{
+  padding:27px 0 34px;
+  color:#949ba5;
+  font-size:11px;
+  line-height:1.8;
+}
+.back-btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-height:42px;
+  margin-top:20px;
+  padding:0 15px;
+  border-radius:11px;
+  background:var(--navy);
+  color:#fff;
+  font-size:12px;
+  font-weight:900;
+}
+
+@media(max-width:900px){
+  .features{grid-template-columns:1fr 1fr}
+  .overview,.contact{grid-template-columns:1fr}
+  .section-head{display:block}
+  .section-head p{text-align:left;margin-top:8px}
+}
+@media(max-width:650px){
+  .wrap{width:min(100% - 22px,1180px)}
+  .nav{min-height:72px}
+  .logo img{width:145px}
+  .social{width:32px;height:32px}
+  .menu-toggle{display:flex}
+  .nav{position:relative}
+  .menu{
+    display:none;
+    position:absolute;
+    top:calc(100% + 1px);
+    left:0;
+    right:0;
+    flex-direction:column;
+    align-items:stretch;
+    gap:0;
+    padding:10px;
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:0 0 16px 16px;
+    box-shadow:0 14px 28px rgba(15,23,42,.08);
+  }
+  .menu.open{display:flex}
+  .menu a{
+    display:block;
+    padding:14px 12px;
+    border-radius:10px;
+    font-size:14px;
+  }
+  .menu a:hover{background:#f5f7fa}
+  .hero{padding:34px 0 26px}
+  .hero-card{padding:34px 24px;border-radius:22px}
+  .hero-lead{font-size:16px}
+  .hero-sub{font-size:13px}
+  .section{padding:22px 0 48px}
+  .section-head h2{font-size:28px}
+  .features{grid-template-columns:1fr}
+  .feature{min-height:auto}
+  .reason{grid-template-columns:48px minmax(0,1fr);gap:15px;padding:22px 18px}
+  .reason-no{width:44px;height:44px;border-radius:13px}
+  .hosts{grid-template-columns:1fr}
+}
+
+/* REQUIREMENT */
+.hero{padding:48px 0 28px}
+.hero-card{padding:44px 48px}
+.hero h1{font-size:clamp(36px,5vw,54px);margin:14px 0}
+.hero-lead{font-size:17px;line-height:1.8}
+.hero-card:after{pointer-events:none}
+.year-label{display:inline-flex;margin-top:20px;padding:7px 11px;border-radius:8px;background:#e5edf8;color:#315b9e;font-size:12px;font-weight:800}
+.menu a[aria-current="page"]{color:var(--blue)}
+.tabs-wrap{margin-bottom:28px}
+.tab-list{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;padding:7px;border:1px solid #dfe6ef;border-radius:18px;background:#eaf0f7}
+.tab-list a{display:flex;align-items:center;justify-content:center;gap:9px;padding:18px 12px;text-align:center;border-radius:12px;font-size:15px;font-weight:850;color:#58677b;line-height:1.5}
+.tab-list a[aria-selected="true"]{background:var(--navy);color:#fff;box-shadow:0 5px 15px #173a6f18}
+.tab-list a:hover{background:#dce6f4}
+.tab-list a[aria-selected="true"]:hover{background:var(--navy)}
+.tab-list small{font-size:11px;opacity:.7}
+.tab-panel{padding-bottom:46px;scroll-margin-top:105px}
+.tab-panel[hidden]{display:none!important}
+.panel-title{display:flex;gap:16px;align-items:center;margin:16px 0 24px}
+.panel-title h2{margin:0;font-size:30px;letter-spacing:-.04em}
+.panel-title span{display:grid;place-items:center;background:#e8eef8;color:#315b9e;border-radius:11px;width:38px;height:38px;font-size:12px;font-weight:900}
+.content-card{padding:30px 32px;background:#fff;border:1px solid var(--line);border-radius:20px;margin-bottom:22px;min-width:0}
+.content-card h3{font-size:22px;margin:0 0 18px;letter-spacing:-.03em;color:#172b48}
+.content-card h4{font-size:17px;line-height:1.6;margin:22px 0 12px;color:#173a6f}
+.content-card p,.content-card li{font-size:14px;line-height:1.95;color:#485567}
+.content-card p{margin:12px 0}
+ul,ol{padding-left:22px;margin:12px 0}
+li+li{margin-top:9px}
+.theme-banner{background:#173a6f;color:#fff;padding:32px;border-radius:18px;margin-bottom:24px}
+.theme-banner small{font-size:11px;letter-spacing:.12em;color:#b9cbea;font-weight:850}
+.theme-banner h3{color:#fff;font-size:clamp(23px,3vw,32px);line-height:1.5;margin:13px 0 0}
+.intro-text{margin-bottom:26px}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.topic{background:#f3f6fb;border:1px solid #e0e8f3;border-radius:15px;padding:25px}
+.topic h4{margin:0 0 17px;font-size:19px}
+.topic p{margin:14px 0 0}
+.topic b{font-size:12px;display:block;color:#315b9e;margin-bottom:5px}
+.callout{padding:15px 18px;border-left:3px solid #315b9e;background:#f0f5fc;color:#3d5475;font-size:13px;line-height:1.9;margin:18px 0 0;border-radius:0 10px 10px 0}
+.callout.warning{background:#fff6ed;border-color:#c98031;color:#82501d}
+.section-caption{font-size:11px;font-weight:850;letter-spacing:.1em;color:#315b9e;margin-bottom:8px}
+.schedule-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.stage{padding:22px 18px;border:1px solid #dfe7f2;border-radius:14px;background:#f8faff}
+.stage:first-child{background:#edf3fc;border-color:#a6bddf}
+.stage small{color:#6c7d94;font-size:11px}
+.stage h4{margin:12px 0;font-size:16px}
+.stage strong{display:block;color:#173a6f;font-size:21px;line-height:1.5;letter-spacing:-.04em}
+.stage p{font-size:12px;margin-bottom:0}
+.eligibility{font-weight:800;color:#173a6f!important;font-size:17px!important}
+.table-wrap{overflow-x:auto;max-width:100%;border:1px solid #dfe6ef;border-radius:12px;margin:16px 0}
+table{width:100%;border-collapse:collapse;font-size:13px;line-height:1.8;table-layout:fixed}
+th{background:#edf2f9;color:#274364;font-weight:850;text-align:left}
+th,td{padding:14px 17px;border-bottom:1px solid #e6ebf2;vertical-align:top;overflow-wrap:anywhere}
+tr:last-child td{border-bottom:0}
+td{color:#485567}
+.score-table th:first-child{width:18%}.score-table th:last-child{width:12%;text-align:center}.score-table td:last-child{text-align:center;font-weight:850;color:#173a6f;white-space:nowrap}
+.score-table td p{font-size:13px;margin:0;line-height:1.8}
+.award-table th:nth-child(1){width:17%}.award-table th:nth-child(2){width:14%}.award-table th:nth-child(3){width:27%}
+.award-table tbody tr:first-child td{background:#f1f6fd;font-weight:800;color:#173a6f}
+.tie{font-size:12px!important;color:#66758a!important;margin-top:12px!important;line-height:1.8!important}
+.rules{counter-reset:rule;list-style:none;padding:0}
+.rules>li{position:relative;padding-left:32px;margin:0 0 18px}
+.rules>li:before{counter-increment:rule;content:counter(rule) ")";position:absolute;left:0;color:#315b9e;font-weight:850}
+.rule-note{display:block;margin-top:7px;font-size:13px;color:#6c7686}
+.rule-heading{display:flex;align-items:center;gap:12px;margin-bottom:20px}
+.rule-heading h3{margin:0}
+.rule-heading small{white-space:nowrap;background:#eaf0f9;color:#315b9e;font-size:11px;font-weight:850;border-radius:7px;padding:7px 10px}
+.benefit{padding:20px 0;border-top:1px solid var(--line)}
+.benefit:first-of-type{border-top:0;padding-top:0}
+.benefit h4{margin:0 0 8px;font-size:18px}
+.benefit p:last-child{margin-bottom:0}
+.panel-bottom{display:flex;justify-content:flex-end;gap:10px;flex-wrap:wrap;margin:24px 0}
+.panel-bottom a{display:inline-flex;padding:13px 19px;background:#173a6f;color:white;border-radius:10px;font-size:13px;font-weight:800}
+a:focus-visible,button:focus-visible{outline:3px solid #598fe2;outline-offset:4px}
+.close{flex-shrink:0}
+@media(max-width:1000px){.menu{gap:14px;font-size:13px}.schedule-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:760px){.menu-toggle{display:flex}.nav{position:relative}.menu{display:none;position:absolute;top:calc(100% + 1px);left:0;right:0;flex-direction:column;align-items:stretch;gap:0;padding:10px;background:#fff;border:1px solid var(--line);border-radius:0 0 16px 16px;box-shadow:0 14px 28px #0f172a14}.menu.open{display:flex}.menu a{padding:14px 12px}.two-col{grid-template-columns:1fr}.tab-list a{font-size:13px;padding:15px 8px}.tab-list small{display:none}}
+@media(max-width:650px){.hero{padding:28px 0 20px}.hero-card{padding:30px 24px}.hero-lead{font-size:14px}.content-card{padding:24px 18px;border-radius:16px}.content-card h3{font-size:21px}.panel-title h2{font-size:24px}.theme-banner{padding:24px 20px}.tab-list{gap:4px;padding:5px;border-radius:13px}.tab-list a{padding:13px 4px;font-size:12px;border-radius:9px;word-break:keep-all}.tabs-wrap{margin-bottom:22px}.topic{padding:20px}.score-table th:first-child{width:23%}.score-table th:last-child{width:16%}th,td{padding:11px 9px;font-size:12px}.score-table td p{font-size:12px}.stage{padding:18px 13px}.stage strong{font-size:20px}.rule-heading{align-items:flex-start}.rule-heading h3{font-size:19px}.contact-card{padding:22px}.contact-row{grid-template-columns:55px minmax(0,1fr);gap:10px}.brand-row{gap:8px}.socials{gap:5px}.rules>li{padding-left:26px}.award-table th:nth-child(1){width:16%}.award-table th:nth-child(2){width:15%}.award-table th:nth-child(3){width:29%}}
+@media(max-width:360px){.logo img{width:125px}.social{width:28px;height:28px}.menu-toggle{padding:0 9px}.nav{gap:8px}.stage strong{font-size:18px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+@media print{header,.tabs-wrap,.panel-bottom,.back-btn{display:none!important}.tab-panel[hidden]{display:block!important}.tab-panel{padding-bottom:12px}.hero{padding-top:0}.content-card{break-inside:auto}.theme-banner{background:white;color:#173a6f}.theme-banner h3{color:#173a6f}.wrap{width:100%}.content-card{border-radius:0}body{background:white}}
+
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}.tab-list{scroll-margin-top:100px}
+
+@media(max-width:1000px){.menu{gap:14px;font-size:13px}}
+</style>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="./config.js"></script>
+</head>
+
+<body>
+<header>
+  <div class="wrap nav">
+    <div class="brand-row">
+      <a class="logo" href="./index.html">
+        <img src="./kosac-logo.png" alt="KOSAC 로고">
+      </a>
+      <div class="socials">
+        <a class="social" href="https://www.youtube.com/@kosac9720" target="_blank" rel="noopener" aria-label="KOSAC YouTube">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path fill="#ff0000" d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8Z"/>
+            <path fill="#fff" d="m9.6 15.6 6.2-3.6-6.2-3.6v7.2Z"/>
+          </svg>
+        </a>
+        <a class="social" href="https://www.instagram.com/kosac_official" target="_blank" rel="noopener" aria-label="KOSAC Instagram">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <defs>
+              <linearGradient id="ig" x1="0" y1="1" x2="1" y2="0">
+                <stop offset="0" stop-color="#ffdc80"/>
+                <stop offset=".35" stop-color="#fcaf45"/>
+                <stop offset=".58" stop-color="#f77737"/>
+                <stop offset=".78" stop-color="#c13584"/>
+                <stop offset="1" stop-color="#405de6"/>
+              </linearGradient>
+            </defs>
+            <rect x="2" y="2" width="20" height="20" rx="6" fill="url(#ig)"/>
+            <circle cx="12" cy="12" r="4.2" fill="none" stroke="#fff" stroke-width="1.8"/>
+            <circle cx="17.5" cy="6.6" r="1.2" fill="#fff"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+
+    <button class="menu-toggle" id="menuToggle" type="button" aria-expanded="false" aria-controls="mainMenu">
+      <span class="bars"><span></span></span>
+      메뉴
+    </button>
+
+    <nav class="menu" id="mainMenu">
+      <a href="./about.html">KOSAC 소개</a>
+      <a href="./guidelines.html" aria-current="page">시행요강</a>
+      <a href="./index.html#notice">공지사항</a>
+      <a href="./index.html#contact">CONTACT US</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<section class="hero"><div class="wrap"><div class="hero-card"><div class="eyebrow"><!--cms:guidelines_001-->KOSAC REQUIREMENT<!--/cms:guidelines_001--></div><h1><!--cms:guidelines_002-->시행요강<!--/cms:guidelines_002--></h1><p class="hero-lead"><!--cms:guidelines_003-->대회 주제와 일정부터 제출규격, 심사기준, 수상혜택까지<!--/cms:guidelines_003--><br><!--cms:guidelines_004-->참가에 필요한 안내를 확인하세요.<!--/cms:guidelines_004--></p><span class="year-label"><!--cms:guidelines_005-->2026 KOSAC 영상콘텐츠챌린지 기준<!--/cms:guidelines_005--></span></div></div></section>
+<div class="wrap tabs-wrap"><nav class="tab-list" aria-label="시행요강 항목"><a id="tab-theme" href="#theme"><small>01</small>주제 및 일정</a><a id="tab-submission" href="#submission"><small>02</small>제출규격 및 유의사항</a><a id="tab-awards" href="#awards"><small>03</small>시상내역 및 수상혜택</a></nav></div>
+<div class="wrap"><section id="theme" class="tab-panel" aria-labelledby="tab-theme"><div class="panel-title"><span>01</span><h2><!--cms:guidelines_006-->주제 및 일정<!--/cms:guidelines_006--></h2></div>
+<section class="content-card"><div class="theme-banner"><small><!--cms:guidelines_007-->2026 KOSAC × 배달의민족<!--/cms:guidelines_007--></small><h3><!--cms:guidelines_008-->「배민과 함께하는 더 나은 일상의 변화」<!--/cms:guidelines_008--><br><!--cms:guidelines_009-->프로젝트<!--/cms:guidelines_009--></h3></div>
+<div class="intro-text"><p><!--cms:guidelines_010-->● 최근 배달 플랫폼은 단순한 음식을 넘어 소비자의 일상을 지원하는 생활 플랫폼으로 진화하고 있습니다. 배달의민족 역시 배달 서비스를 시작으로 장보기·쇼핑 등 커머스 영역을 확장하며, 사회공헌과 신규 서비스 개발을 통해 소비자의 삶에 새로운 가치를 더하고 있습니다.<!--/cms:guidelines_010--></p><p><!--cms:guidelines_011-->● 이에 KOSAC과 배달의민족은 대학생들과 함께 소비자의 일상 속에서 배민이 제공할 수 있는 새로운 가치와 역할을 고민하고, 더 나은 일상을 만들어갈 다양한 커뮤니케이션 및 사회공헌 아이디어를 발굴하고자 합니다.<!--/cms:guidelines_011--></p></div>
+<h4><!--cms:guidelines_012-->아래 주제 중 한 가지를 선택하여 영상콘텐츠를 제작해 주세요.<!--/cms:guidelines_012--></h4>
+<div class="two-col"><article class="topic"><h4><!--cms:guidelines_013-->1. 크리에이티브영상 부문<!--/cms:guidelines_013--></h4><p><b><!--cms:guidelines_014-->① 주제 1 · 브랜드 미션<!--/cms:guidelines_014--></b><!--cms:guidelines_015-->‘세상 모든 것이 식지 않도록’ 배민 [브랜드 미션] 영상 제작<!--/cms:guidelines_015--></p><p><b><!--cms:guidelines_016-->② 주제 2 · 커머스<!--/cms:guidelines_016--></b><!--cms:guidelines_017-->2030 소비 일상에 변화를 준 배민 [커머스]의 브랜드 필름<!--/cms:guidelines_017--></p></article><article class="topic"><h4><!--cms:guidelines_018-->2. 아이디어영상 부문<!--/cms:guidelines_018--></h4><p><b><!--cms:guidelines_019-->① 주제 1 · 사회공헌<!--/cms:guidelines_019--></b><!--cms:guidelines_020-->아이들을 위한 신규 [사회공헌] 프로그램 제안<!--/cms:guidelines_020--></p><p><b><!--cms:guidelines_021-->② 주제 2 · 서비스<!--/cms:guidelines_021--></b><!--cms:guidelines_022-->2030의 라이프스타일/니즈를 반영한 신규 [서비스] 제안<!--/cms:guidelines_022--></p></article></div><div class="callout"><!--cms:guidelines_023-->※ 각 주제별 세부과제는 시행요강 13페이지를 참고해 주세요.<!--/cms:guidelines_023--></div></section>
+<section class="content-card"><div class="section-caption"><!--cms:guidelines_024-->SCHEDULE<!--/cms:guidelines_024--></div><h3><!--cms:guidelines_025-->행사일정<!--/cms:guidelines_025--></h3><div class="schedule-grid">
+<article class="stage"><small><!--cms:guidelines_026-->01 · 작품접수<!--/cms:guidelines_026--></small><h4><!--cms:guidelines_027-->접수기간<!--/cms:guidelines_027--></h4><strong><!--cms:guidelines_028-->11.02 — 11.09<!--/cms:guidelines_028--></strong><p><!--cms:guidelines_029-->2026년 11월 2일(월)<!--/cms:guidelines_029--><br><!--cms:guidelines_030-->~ 11월 9일(월)<!--/cms:guidelines_030--></p></article>
+<article class="stage"><small><!--cms:guidelines_031-->02 · 서류심사<!--/cms:guidelines_031--></small><h4><!--cms:guidelines_032-->서류심사<!--/cms:guidelines_032--></h4><strong><!--cms:guidelines_033-->11.17<!--/cms:guidelines_033--></strong><p><!--cms:guidelines_034-->2026년 11월 17일(화)<!--/cms:guidelines_034--></p></article>
+<article class="stage"><small><!--cms:guidelines_035-->03 · 1차본심<!--/cms:guidelines_035--></small><h4><!--cms:guidelines_036-->1차본심<!--/cms:guidelines_036--></h4><strong><!--cms:guidelines_037-->11.18<!--/cms:guidelines_037--></strong><p><!--cms:guidelines_038-->2026년 11월 18일(수)<!--/cms:guidelines_038--></p></article>
+<article class="stage"><small><!--cms:guidelines_039-->04 · 전국대회<!--/cms:guidelines_039--></small><h4><!--cms:guidelines_040-->전국대회<!--/cms:guidelines_040--></h4><strong><!--cms:guidelines_041-->11.27<!--/cms:guidelines_041--></strong><p><!--cms:guidelines_042-->2026년 11월 27일(금)<!--/cms:guidelines_042--></p></article></div><p class="tie"><!--cms:guidelines_043-->※ 상기 일정은 사정상 변경될 수 있으며, 변경 시 추후 홈페이지를 통해 안내됩니다.<!--/cms:guidelines_043--></p></section>
+<div class="panel-bottom"><a href="#submission" data-next>제출규격 및 유의사항 →</a></div></section>
+<section id="submission" class="tab-panel" aria-labelledby="tab-submission"><div class="panel-title"><span>02</span><h2><!--cms:guidelines_044-->제출규격 및 유의사항<!--/cms:guidelines_044--></h2></div>
+<section class="content-card"><h3><!--cms:guidelines_045-->참가자격<!--/cms:guidelines_045--></h3><p class="eligibility"><!--cms:guidelines_046-->2년제 이상 대학 및 대학원 재(휴)학생<!--/cms:guidelines_046--><br><!--cms:guidelines_047-->지도교수를 선임한 2~5인 팀 구성 필수<!--/cms:guidelines_047--></p><ul><li><!--cms:guidelines_048-->학생 기준 2~5인으로 구성되어야 하며, 단독 출품은 불가<!--/cms:guidelines_048--></li><li><!--cms:guidelines_049-->2027년 2월 졸업예정자, 국내 대학 재학 중인 외국인도 참가 가능<!--/cms:guidelines_049--></li><li><!--cms:guidelines_050-->광고업계 종사자, 사회인, 해외 대학 재학 외국인, 한국인 유학생은 참가 불가<!--/cms:guidelines_050--></li></ul></section><section class="content-card"><h3><!--cms:guidelines_051-->제출방식<!--/cms:guidelines_051--></h3><p><strong><!--cms:guidelines_052-->부문:<!--/cms:guidelines_052--></strong> <!--cms:guidelines_053-->크리에이티브영상 부문(기존부문) / 아이디어영상 부문(신규부문)<!--/cms:guidelines_053--><br><strong><!--cms:guidelines_054-->출품형식:<!--/cms:guidelines_054--></strong> <!--cms:guidelines_055-->출품 주제에 대한 영상콘텐츠<!--/cms:guidelines_055--></p>
+<div class="two-col"><article class="topic"><h4><!--cms:guidelines_056-->크리에이티브영상 부문<!--/cms:guidelines_056--></h4><ul><li><!--cms:guidelines_057-->최대 60초 이내(MP4 기준), 단편으로만 응모 가능<!--/cms:guidelines_057--></li><li><!--cms:guidelines_058-->숏츠, 틱톡, 릴스, TV광고 등 영상 형식 제한 없음<!--/cms:guidelines_058--></li><li><!--cms:guidelines_059-->MP4 형식만 제출 가능 / FHD급 화소 / 500MB 이하 / 가로·세로 구분 없음<!--/cms:guidelines_059--></li><li><!--cms:guidelines_060-->출품작에 대한 요약 설명이 담긴 아이디어 보드 제출 필수(장표 1장)<!--/cms:guidelines_060--></li></ul></article>
+<article class="topic"><h4><!--cms:guidelines_061-->아이디어영상 부문<!--/cms:guidelines_061--></h4><ul><li><!--cms:guidelines_062-->아이디어와 실현 방안을 설득력 있게 전달하는 영상(최대 120초 이내), 단편으로만 응모 가능<!--/cms:guidelines_062--></li><li><!--cms:guidelines_063-->MP4 형식만 제출 가능 / FHD급 화소 / 800MB 이하 / 가로 형식만 가능<!--/cms:guidelines_063--></li><li><!--cms:guidelines_064-->출품작에 대한 요약 설명이 담긴 아이디어 보드 제출 필수(장표 1장)<!--/cms:guidelines_064--></li></ul></article></div>
+<h4><!--cms:guidelines_065-->공통 안내<!--/cms:guidelines_065--></h4><ul><li><!--cms:guidelines_066-->아이디어 보드는 자유 형식으로 1장의 장표로 제작하되,<!--/cms:guidelines_066--> <strong><!--cms:guidelines_067-->인사이트(기획 의도), 아이디어, 기대 효과<!--/cms:guidelines_067--></strong><!--cms:guidelines_068-->를 반드시 포함해야 함<!--/cms:guidelines_068--></li><li><!--cms:guidelines_069-->예심심사는 인터넷이 연결되지 않은 노트북으로 진행되므로, 아이디어 보드 내 인터넷 연결이 필요한 URL 등은 삽입 금지<!--/cms:guidelines_069--></li></ul>
+<h4><!--cms:guidelines_070-->유의사항<!--/cms:guidelines_070--></h4><ul><li><!--cms:guidelines_071-->파일 형식: 출품영상(MP4), 아이디어 보드(PDF)<!--/cms:guidelines_071--><span class="rule-note"><!--cms:guidelines_072-->※ 아이디어 보드를 제작하는 프로그램은 제한이 없으나, 해당 파일을 PDF로 변환하여 제출해야 함.<!--/cms:guidelines_072--><br><!--cms:guidelines_073-->※ 단, 전국대회 진출 시 프레젠테이션은 PPT로 진행<!--/cms:guidelines_073--></span></li><li><!--cms:guidelines_074-->출품 방법: 홈페이지(kosac.ad.co.kr) 온라인 접수(우편·방문 접수 불가)<!--/cms:guidelines_074--></li><li><!--cms:guidelines_075-->최종 PT심사(전국대회) 진출팀에게는 프레젠테이션을 위한 별도의 발표파일 작성기간을 부여 예정<!--/cms:guidelines_075--></li></ul></section><div class="panel-title"><h2><!--cms:guidelines_076-->출품 및 제작규정<!--/cms:guidelines_076--></h2></div><section class="content-card"><div class="rule-heading"><small><!--cms:guidelines_077-->규정 01<!--/cms:guidelines_077--></small><h3><!--cms:guidelines_078-->PPT 표지 및 내지 규정<!--/cms:guidelines_078--></h3></div><ol class="rules"><li><!--cms:guidelines_079-->KOSAC 심사 전 과정은 Blind로 진행<!--/cms:guidelines_079--></li><li><!--cms:guidelines_080-->출품작(영상) 및 아이디어 보드에 팀명, 작품 제목 외에는 학교, 학과, 기타 소속, 이름 등 개인정보 작성 금지<!--/cms:guidelines_080--></li><li><!--cms:guidelines_081-->전국대회 발표 PPT 내지에도 학교, 학과, 기타 소속, 이름 등 개인정보 노출 금지<!--/cms:guidelines_081--><br><!--cms:guidelines_082-->특히 각 학교 내 설문진행 결과자료 등에 학교명, 개인이름 작성 금지<!--/cms:guidelines_082--><span class="rule-note"><!--cms:guidelines_083-->(예: ‘광고대학교 3학년 김코삭’ → ‘OO대학교 3학년 김OO’으로 기입)<!--/cms:guidelines_083--></span></li></ol><div class="callout warning"><!--cms:guidelines_084-->※ 제출방식을 준수하지 않은 작품은 심사에 불이익을 당할 수 있습니다.<!--/cms:guidelines_084--></div></section><section class="content-card"><div class="rule-heading"><small><!--cms:guidelines_085-->규정 02<!--/cms:guidelines_085--></small><h3><!--cms:guidelines_086-->제작규정<!--/cms:guidelines_086--></h3></div><ol class="rules"><li><!--cms:guidelines_087-->출품작은 반환하지 않으며, 출품작의 저작권은 출품자에게 귀속됩니다. 단, 수상작에 한해 연합회와 후원사(우아한 형제들)에서 대회홍보, 마케팅, 교육 등의 목적으로 출품작을 사용할 수 있습니다.<!--/cms:guidelines_087--></li><li><!--cms:guidelines_088-->후원사(우아한 형제들)는 수상작 아이디어를 실제 사업이나 서비스 운영에 적용할 수 있습니다. 또한 수상작의 아이디어를 수정·보완(2차적 저작물 작성)하여 활용할 수 있으며, 이 과정에서 수상자와 긴밀히 소통할 예정입니다.<!--/cms:guidelines_088--></li><li><!--cms:guidelines_089-->연합회와 후원사(우아한 형제들)가 수상작 외의 출품작을 활용하고자 할 경우, 출품자와 별도로 협의하여 결정할 예정입니다.<!--/cms:guidelines_089--></li><li><!--cms:guidelines_090-->출품작품은 기존에 발표되지 않은 순수한 창작 작품이어야 합니다. 표절 또는 모방작으로 판명될 경우 심사에서 제외되며, 수상하였더라도 추후 표절 사실이 밝혀질 경우 수상을 취소합니다.<!--/cms:guidelines_090--></li><li><!--cms:guidelines_091-->모든 결과물은 출품팀의 순수 창작물이어야 하므로 타인(출품팀 및 지도교수 외)에게 대가를 지불하여 제작하거나, 대가를 지불하지 않았다 하여도 타인의 힘을 빌려 제작한 것이 밝혀질 경우 수상이 취소됩니다.<!--/cms:guidelines_091--></li><li><!--cms:guidelines_092-->인공지능(AI)을 활용할 수 있으나 사용 프로그램, 활용한 부분 등을 작품 내 명시해야 합니다.<!--/cms:guidelines_092--></li><li><!--cms:guidelines_093-->Mac OS 환경에서 제작한 작품 파일은 Windows 환경에서도 정상적으로 열람될 수 있도록 사전에 호환 여부를 반드시 확인한 후 제출해 주시기 바라며, 심사 및 프레젠테이션은 Windows 운영체제 환경에서 진행됩니다.<!--/cms:guidelines_093--></li><li><!--cms:guidelines_094-->출품작에 사용하는 모든 저작물(영상, 사진, 음성, 음악, 폰트 등)은 저작권을 침해하지 않은 소재여야 하며, 제출된 작품과 관련하여 발생하는 저작권 등 법적 분쟁에 대한 책임은 참가자에게 귀속됩니다.<!--/cms:guidelines_094--></li><li><!--cms:guidelines_095-->출품작 제작 시 촬영 허가, 장소 사용 허가, 출연자 초상권 등 저작권 관련 사항을 해결해야 합니다. KOSAC 측은 필요에 따라 증빙 자료를 요청할 수 있으며, 관련 문제 발생 시 모든 책임은 참가자에게 귀속됩니다.<!--/cms:guidelines_095--></li><li><!--cms:guidelines_096-->수상작은 KOSAC 홈페이지와 공식 소셜미디어(유튜브, 인스타그램 등)를 통해 공개됩니다. 출품작을 제출하기 전에 반드시 유튜브에 업로드 테스트하여 영상 및 배경음악 등의 저작권 침해여부를 자체검수 바랍니다.<!--/cms:guidelines_096--><br><!--cms:guidelines_097-->추후 KOSAC 유튜브 업로드 시 저작권 침해 등의 사유로 업로드가 불가할 경우 수상을 취소합니다.<!--/cms:guidelines_097--><span class="rule-note"><!--cms:guidelines_098-->※ 단, 유튜브 자체검수는 영상 및 음악 등에 대한 저작권 침해여부를 확인하는 것으로, 출품작 자체에 대한 표절 여부(영상구성, 아이디어, 스토리 등) 검수와는 무관합니다.<!--/cms:guidelines_098--></span></li><li><!--cms:guidelines_099-->위의 규정을 준수하지 않아 발생하는 모든 문제는 출품팀에게 있습니다.<!--/cms:guidelines_099--></li></ol></section><section class="content-card"><div class="rule-heading"><small><!--cms:guidelines_100-->규정 03<!--/cms:guidelines_100--></small><h3><!--cms:guidelines_101-->출품규정<!--/cms:guidelines_101--></h3></div><ol class="rules"><li><!--cms:guidelines_102-->참가지역 구분(6개 지역)은 재학 중인 학교를 기준으로 등록하셔야 합니다. 지역을 잘못 지정한 경우에는 해당지역으로 심사권이 넘어가게 되며, 규정사항 미준수로 실격처리 됩니다. 또한 수상하였더라도 추후에 해당 사실이 밝혀질 경우에도 수상을 취소합니다.<!--/cms:guidelines_102--><span class="rule-note"><!--cms:guidelines_103-->※ 분교 또는 캠퍼스가 분리되어 있는 경우 해당 캠퍼스 소재지로 출품<!--/cms:guidelines_103--></span></li><li><!--cms:guidelines_104-->출품 시 반드시 해당 출품부문(크리에이티브영상 부문, 아이디어영상 부문)을 정확히 선택하여 등록하여야 합니다. 출품부문을 잘못 지정한 경우, 별도의 부문 변경 없이 등록된 부문을 기준으로 심사가 진행되며, 출품부문 관련 규정 미준수로 실격 처리됩니다. 또한 수상하였더라도 추후 해당 사실이 밝혀질 경우에도 수상을 취소합니다.<!--/cms:guidelines_104--></li><li><!--cms:guidelines_105-->팀 구성이 여러 학교인 경우, 팀원의 과반수가 속한 지역을 선택하여야 하며, 지역비율이 2:2로 동일한 경우는 지도교수님의 소속지역으로 선택하십시오.<!--/cms:guidelines_105--></li><li><!--cms:guidelines_106-->출품이 마감시간에 집중되어 일시적 서버다운 등의 현상이 발생할 수 있으니, 가급적 마감시간 최소 3시간 전에는 작품 및 아이디어보드를 업로드해 주시길 권장합니다.<!--/cms:guidelines_106--></li><li><!--cms:guidelines_107-->1팀(명)이 동일 부문에 2작품 이상 출품할 수 있으며, 각 부문에 1작품 이상씩 동시 출품하는 것도 가능합니다. 단, 2작품 이상 출품하는 경우 작품 간 유사성(콘셉트, 크리에이티브 등)이 없어야 합니다.<!--/cms:guidelines_107--><br><!--cms:guidelines_108-->동일하거나 유사한 작품을 중복 출품한 경우 해당 작품은 출품이 취소되며, 수상 이후 확인된 경우에도 수상이 취소됩니다.<!--/cms:guidelines_108--></li><li><!--cms:guidelines_109-->영문 또는 영문·국문을 혼용하여 출품작을 제작할 수 있으며, 영어 프레젠테이션(전국대회) 가능합니다.<!--/cms:guidelines_109--><span class="rule-note"><!--cms:guidelines_110-->※ 영문 출품작, 영어 PT에 대한 별도의 가산점 없음<!--/cms:guidelines_110--></span></li></ol></section><section class="content-card"><h3><!--cms:guidelines_111-->기타사항<!--/cms:guidelines_111--></h3><p><!--cms:guidelines_112-->출품작 평가결과에 대해 일체 이의를 제기할 수 없으며, 평가점수 및 세부결과는 공개하지 않습니다.<!--/cms:guidelines_112--></p></section><div class="panel-title"><h2><!--cms:guidelines_113-->심사규정<!--/cms:guidelines_113--></h2></div><section class="content-card"><h3><!--cms:guidelines_114-->예심 및 1차 본심<!--/cms:guidelines_114--></h3><h4><!--cms:guidelines_115-->심사방법<!--/cms:guidelines_115--></h4><ul><li><!--cms:guidelines_116-->총 100점 만점으로 심사항목별 점수 차등배점<!--/cms:guidelines_116--></li><li><!--cms:guidelines_117-->작품별 부여받은 심사점수의 평균값으로 순위 산출<!--/cms:guidelines_117--></li></ul><h4><!--cms:guidelines_118-->심사기준<!--/cms:guidelines_118--></h4><h4><!--cms:guidelines_119-->① 크리에이티브영상 부문<!--/cms:guidelines_119--></h4><div class="table-wrap"><table class="score-table"><caption class="sr-only">① 크리에이티브영상 부문 심사기준</caption><thead><tr><th scope="col"><!--cms:guidelines_120-->구분<!--/cms:guidelines_120--></th><th scope="col"><!--cms:guidelines_121-->심사내용<!--/cms:guidelines_121--></th><th scope="col"><!--cms:guidelines_122-->배점<!--/cms:guidelines_122--></th></tr></thead><tbody><tr><td><!--cms:guidelines_123-->주제부합성<!--/cms:guidelines_123--></td><td><p><!--cms:guidelines_124-->○ 크리에이티브가 주제와 타깃에 부합하여 제작되었는지 여부<!--/cms:guidelines_124--></p><p><!--cms:guidelines_125-->○ 문제에 대한 분석과 적합성<!--/cms:guidelines_125--></p><p><!--cms:guidelines_126-->○ 영상이 목표 타깃과 부합하는지 여부<!--/cms:guidelines_126--></p></td><td><!--cms:guidelines_127-->20점<!--/cms:guidelines_127--></td></tr><tr><td><!--cms:guidelines_128-->창의성<!--/cms:guidelines_128--></td><td><p><!--cms:guidelines_129-->○ 주제를 바라보는 시각과 접근의 참신함<!--/cms:guidelines_129--></p><p><!--cms:guidelines_130-->○ 기존 틀에서 벗어난 독창적인 아이디어 여부<!--/cms:guidelines_130--></p><p><!--cms:guidelines_131-->○ 남다른 인사이트와 이를 뒷받침하는 설득력 있는 해석 여부<!--/cms:guidelines_131--></p></td><td><!--cms:guidelines_132-->50점<!--/cms:guidelines_132--></td></tr><tr><td><!--cms:guidelines_133-->현실성<!--/cms:guidelines_133--></td><td><p><!--cms:guidelines_134-->○ 콘텐츠의 실제 활용 가능성 여부<!--/cms:guidelines_134--></p></td><td><!--cms:guidelines_135-->10점<!--/cms:guidelines_135--></td></tr><tr><td><!--cms:guidelines_136-->영상 표현력<!--/cms:guidelines_136--></td><td><p><!--cms:guidelines_137-->○ 영상의 종합적인 표현력<!--/cms:guidelines_137--></p></td><td><!--cms:guidelines_138-->20점<!--/cms:guidelines_138--></td></tr></tbody></table></div><p class="tie"><!--cms:guidelines_139-->※ 심사결과 동점작 발생 시 배점 및 중요도가 높은 ‘창의성’, ‘주제부합성’ 및 ‘영상 표현력’의 합산점수, ‘현실성’ 순으로 고득점 작품을 우선하여 순위를 결정<!--/cms:guidelines_139--></p><h4><!--cms:guidelines_140-->② 아이디어영상 부문<!--/cms:guidelines_140--></h4><div class="table-wrap"><table class="score-table"><caption class="sr-only">② 아이디어영상 부문 심사기준</caption><thead><tr><th scope="col"><!--cms:guidelines_141-->구분<!--/cms:guidelines_141--></th><th scope="col"><!--cms:guidelines_142-->심사내용<!--/cms:guidelines_142--></th><th scope="col"><!--cms:guidelines_143-->배점<!--/cms:guidelines_143--></th></tr></thead><tbody><tr><td><!--cms:guidelines_144-->주제부합성<!--/cms:guidelines_144--></td><td><p><!--cms:guidelines_145-->○ 과제의 목적과 요구사항을 정확히 이해하였는지 여부<!--/cms:guidelines_145--></p><p><!--cms:guidelines_146-->○ 타깃의 특성을 고려하여 적합한 아이디어를 제안하였는지 여부<!--/cms:guidelines_146--></p></td><td><!--cms:guidelines_147-->20점<!--/cms:guidelines_147--></td></tr><tr><td><!--cms:guidelines_148-->창의성<!--/cms:guidelines_148--></td><td><p><!--cms:guidelines_149-->○ 새로운 관점의 핵심아이디어(Big Idea) 제시 여부<!--/cms:guidelines_149--></p><p><!--cms:guidelines_150-->○ 기존 접근과 차별화된 독창적인 아이디어 여부<!--/cms:guidelines_150--></p><p><!--cms:guidelines_151-->○ 아이디어의 실현가능 여부<!--/cms:guidelines_151--></p></td><td><!--cms:guidelines_152-->60점<!--/cms:guidelines_152--></td></tr><tr><td><!--cms:guidelines_153-->영상 전달력<!--/cms:guidelines_153--></td><td><p><!--cms:guidelines_154-->○ 아이디어와 실행 방안을 효과적으로 전달하였는지 여부<!--/cms:guidelines_154--></p></td><td><!--cms:guidelines_155-->20점<!--/cms:guidelines_155--></td></tr></tbody></table></div><p class="tie"><!--cms:guidelines_156-->※ 심사 결과 동점작 발생 시 배점 및 중요도가 높은 ‘창의성’, ‘주제부합성’, ‘영상 전달력’ 순으로 고득점 작품을 우선하여 순위를 결정<!--/cms:guidelines_156--></p></section><section class="content-card"><h3><!--cms:guidelines_157-->전국대회(최종본심)<!--/cms:guidelines_157--></h3><h4><!--cms:guidelines_158-->심사방법<!--/cms:guidelines_158--></h4><ul><li><!--cms:guidelines_159-->총 100점 만점으로 심사항목별 점수 차등배점<!--/cms:guidelines_159--></li><li><!--cms:guidelines_160-->작품별 부여받은 심사점수의 평균값으로 순위 산출<!--/cms:guidelines_160--></li><li><!--cms:guidelines_161-->PT심사는 지정된 발표시간 초과 시 30초당 0.5점 감점<!--/cms:guidelines_161--></li></ul><h4><!--cms:guidelines_162-->심사기준<!--/cms:guidelines_162--></h4><h4><!--cms:guidelines_163-->① 크리에이티브영상 부문<!--/cms:guidelines_163--></h4><div class="table-wrap"><table class="score-table"><caption class="sr-only">① 크리에이티브영상 부문 심사기준</caption><thead><tr><th scope="col"><!--cms:guidelines_164-->구분<!--/cms:guidelines_164--></th><th scope="col"><!--cms:guidelines_165-->심사내용<!--/cms:guidelines_165--></th><th scope="col"><!--cms:guidelines_166-->배점<!--/cms:guidelines_166--></th></tr></thead><tbody><tr><td><!--cms:guidelines_167-->주제부합성<!--/cms:guidelines_167--></td><td><p><!--cms:guidelines_168-->○ 크리에이티브가 주제와 타깃에 부합하여 제작되었는지 여부<!--/cms:guidelines_168--></p><p><!--cms:guidelines_169-->○ 문제에 대한 분석과 적합성<!--/cms:guidelines_169--></p><p><!--cms:guidelines_170-->○ 영상이 목표 타깃과 부합하는지 여부<!--/cms:guidelines_170--></p></td><td><!--cms:guidelines_171-->20점<!--/cms:guidelines_171--></td></tr><tr><td><!--cms:guidelines_172-->창의성<!--/cms:guidelines_172--></td><td><p><!--cms:guidelines_173-->○ 주제를 바라보는 시각과 접근의 참신함<!--/cms:guidelines_173--></p><p><!--cms:guidelines_174-->○ 기존 틀에서 벗어난 독창적인 아이디어 여부<!--/cms:guidelines_174--></p><p><!--cms:guidelines_175-->○ 남다른 인사이트와 이를 뒷받침하는 설득력 있는 해석 여부<!--/cms:guidelines_175--></p></td><td><!--cms:guidelines_176-->40점<!--/cms:guidelines_176--></td></tr><tr><td><!--cms:guidelines_177-->현실성<!--/cms:guidelines_177--></td><td><p><!--cms:guidelines_178-->○ 콘텐츠의 실제 활용 가능성 여부<!--/cms:guidelines_178--></p></td><td><!--cms:guidelines_179-->10점<!--/cms:guidelines_179--></td></tr><tr><td><!--cms:guidelines_180-->영상 표현력<!--/cms:guidelines_180--></td><td><p><!--cms:guidelines_181-->○ 영상의 종합적인 표현력<!--/cms:guidelines_181--></p></td><td><!--cms:guidelines_182-->20점<!--/cms:guidelines_182--></td></tr><tr><td><!--cms:guidelines_183-->프레젠테이션<!--/cms:guidelines_183--></td><td><p><!--cms:guidelines_184-->○ 내용을 정확하고 논리적으로 전달하는지 여부<!--/cms:guidelines_184--></p><p><!--cms:guidelines_185-->○ 자신감 있는 태도로 청중과 상호작용하는지 여부<!--/cms:guidelines_185--></p></td><td><!--cms:guidelines_186-->10점<!--/cms:guidelines_186--></td></tr></tbody></table></div><p class="tie"><!--cms:guidelines_187-->※ 심사결과 동점작 발생 시 배점 및 중요도가 높은 ‘창의성’, ‘주제부합성’ 및 ‘영상 표현력’의 합산점수, ‘현실성 및 프레젠테이션의 합산점수’ 순으로 고득점 작품을 우선하여 순위를 결정<!--/cms:guidelines_187--></p><h4><!--cms:guidelines_188-->② 아이디어영상 부문<!--/cms:guidelines_188--></h4><div class="table-wrap"><table class="score-table"><caption class="sr-only">② 아이디어영상 부문 심사기준</caption><thead><tr><th scope="col"><!--cms:guidelines_189-->구분<!--/cms:guidelines_189--></th><th scope="col"><!--cms:guidelines_190-->심사내용<!--/cms:guidelines_190--></th><th scope="col"><!--cms:guidelines_191-->배점<!--/cms:guidelines_191--></th></tr></thead><tbody><tr><td><!--cms:guidelines_192-->주제부합성<!--/cms:guidelines_192--></td><td><p><!--cms:guidelines_193-->○ 과제의 목적과 요구사항을 정확히 이해하였는지 여부<!--/cms:guidelines_193--></p><p><!--cms:guidelines_194-->○ 타깃의 특성을 고려하여 적합한 아이디어를 제안하였는지 여부<!--/cms:guidelines_194--></p></td><td><!--cms:guidelines_195-->20점<!--/cms:guidelines_195--></td></tr><tr><td><!--cms:guidelines_196-->창의성<!--/cms:guidelines_196--></td><td><p><!--cms:guidelines_197-->○ 새로운 관점의 핵심아이디어(Big Idea) 제시 여부<!--/cms:guidelines_197--></p><p><!--cms:guidelines_198-->○ 기존 접근과 차별화된 독창적인 아이디어 여부<!--/cms:guidelines_198--></p><p><!--cms:guidelines_199-->○ 아이디어의 실현가능 여부<!--/cms:guidelines_199--></p></td><td><!--cms:guidelines_200-->60점<!--/cms:guidelines_200--></td></tr><tr><td><!--cms:guidelines_201-->영상 전달력<!--/cms:guidelines_201--></td><td><p><!--cms:guidelines_202-->○ 아이디어와 실행 방안을 효과적으로 전달하였는지 여부<!--/cms:guidelines_202--></p></td><td><!--cms:guidelines_203-->10점<!--/cms:guidelines_203--></td></tr><tr><td><!--cms:guidelines_204-->프레젠테이션<!--/cms:guidelines_204--></td><td><p><!--cms:guidelines_205-->○ 내용을 논리적이고 자신감 있게 전달하였는지 여부<!--/cms:guidelines_205--></p><p><!--cms:guidelines_206-->○ 자신감 있는 태도로 청중과 상호작용하는지 여부<!--/cms:guidelines_206--></p></td><td><!--cms:guidelines_207-->10점<!--/cms:guidelines_207--></td></tr></tbody></table></div><p class="tie"><!--cms:guidelines_208-->※ 심사 결과 동점작 발생 시 배점 및 중요도가 높은 ‘창의성’, ‘주제부합성’, ‘영상 전달력 및 프레젠테이션의 합산점수’ 순으로 고득점 작품을 우선하여 순위를 결정<!--/cms:guidelines_208--></p></section><div class="panel-bottom"><a href="#awards" data-next>시상내역 및 수상혜택 →</a></div></section>
+<section id="awards" class="tab-panel" aria-labelledby="tab-awards"><div class="panel-title"><span>03</span><h2><!--cms:guidelines_209-->시상내역 및 수상혜택<!--/cms:guidelines_209--></h2></div><section class="content-card"><h3><!--cms:guidelines_210-->시상내역<!--/cms:guidelines_210--></h3><div class="table-wrap"><table class="award-table"><caption class="sr-only">2026 KOSAC 시상내역</caption><thead><tr><th scope="col"><!--cms:guidelines_211-->상격<!--/cms:guidelines_211--></th><th scope="col"><!--cms:guidelines_212-->규모<!--/cms:guidelines_212--></th><th scope="col"><!--cms:guidelines_213-->상금<!--/cms:guidelines_213--></th><th scope="col"><!--cms:guidelines_214-->시상품<!--/cms:guidelines_214--></th></tr></thead><tbody><tr><td><!--cms:guidelines_215-->대상<!--/cms:guidelines_215--></td><td><!--cms:guidelines_216-->1팀<!--/cms:guidelines_216--></td><td><!--cms:guidelines_217-->500만원<!--/cms:guidelines_217--></td><td><!--cms:guidelines_218-->상장 및 트로피<!--/cms:guidelines_218--></td></tr><tr><td><!--cms:guidelines_219-->금상<!--/cms:guidelines_219--></td><td><!--cms:guidelines_220-->2팀<!--/cms:guidelines_220--></td><td><!--cms:guidelines_221-->각 150만원<!--/cms:guidelines_221--></td><td><!--cms:guidelines_222-->상장 및 트로피<!--/cms:guidelines_222--></td></tr><tr><td><!--cms:guidelines_223-->은상<!--/cms:guidelines_223--></td><td><!--cms:guidelines_224-->4팀<!--/cms:guidelines_224--></td><td><!--cms:guidelines_225-->각 100만원<!--/cms:guidelines_225--></td><td><!--cms:guidelines_226-->상장 및 트로피<!--/cms:guidelines_226--></td></tr><tr><td><!--cms:guidelines_227-->동상<!--/cms:guidelines_227--></td><td><!--cms:guidelines_228-->5팀<!--/cms:guidelines_228--></td><td><!--cms:guidelines_229-->각 60만원<!--/cms:guidelines_229--></td><td><!--cms:guidelines_230-->상장<!--/cms:guidelines_230--></td></tr><tr><td><!--cms:guidelines_231-->장려상<!--/cms:guidelines_231--></td><td><!--cms:guidelines_232-->4팀<!--/cms:guidelines_232--></td><td><!--cms:guidelines_233-->—<!--/cms:guidelines_233--></td><td><!--cms:guidelines_234-->상장<!--/cms:guidelines_234--></td></tr></tbody></table></div><div class="callout"><strong><!--cms:guidelines_235-->대상 수상팀<!--/cms:guidelines_235--></strong><br><!--cms:guidelines_236-->문화체육관광부 장관상 수여<!--/cms:guidelines_236--><br><!--cms:guidelines_237-->대한민국광고대상 특별상 · SM C&amp;C Rising Creator 상 수여<!--/cms:guidelines_237--><br><!--cms:guidelines_238-->※ 대상은 부문 구분 없이 1팀 선정<!--/cms:guidelines_238--></div><ul><li><!--cms:guidelines_239-->전국대회 수상팀 지도교수 수상 트로피 지급<!--/cms:guidelines_239--></li><li><!--cms:guidelines_240-->코삭챌린저상 ~ 대상 수상팀 지도교수 대상 ‘지도교수상’ 상장 별도 수여<!--/cms:guidelines_240--></li></ul></section><section class="content-card"><h3><!--cms:guidelines_241-->추가 혜택<!--/cms:guidelines_241--></h3><article class="benefit"><h4><!--cms:guidelines_242-->후원사 인턴십 지원<!--/cms:guidelines_242--></h4><p><!--cms:guidelines_243-->후원사: J4D, 피알원, RUNLAB, The SMC, TBWA KOREA, 스프링앤플라워, 드림인사이트, 빅밴드앤코, 애드리치, 와이즈버즈<!--/cms:guidelines_243--></p><p><!--cms:guidelines_244-->※ 전국대회 PT심사에 대회 후원사 인사실무 담당자가 참여하여 인턴십 면접대상자 선발(각 회사별 면접 진행 후 1~2명 내외 채용 예정)<!--/cms:guidelines_244--></p><p><!--cms:guidelines_245-->※ 대상 수상팀을 포함하여 인턴십 기간, 급여 등 관련 세부사항은 채용 회사에서 결정<!--/cms:guidelines_245--></p></article><article class="benefit"><h4><!--cms:guidelines_246-->심사위원 1:1 멘토링<!--/cms:guidelines_246--></h4><p><!--cms:guidelines_247-->전국대회 수상팀 대상 심사위원 1:1 온·오프라인 멘토링(진로상담 등) 진행(12월 중)<!--/cms:guidelines_247--></p></article><article class="benefit"><h4><!--cms:guidelines_248-->수상작품집 제작 및 배포<!--/cms:guidelines_248--></h4><p><!--cms:guidelines_249-->1차본심 및 전국대회 진출팀 대상(지도교수 포함) 수상작품집 제작 및 배포<!--/cms:guidelines_249--></p></article></section><div class="panel-bottom"><a href="#theme" data-next>주제 및 일정으로 ↑</a></div></section></div>  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <small>CONTACT</small>
+          <h2>대한민국 대학생 광고대회</h2>
+        </div>
+      </div>
+
+      <div class="contact">
+        <div class="contact-card">
+          <h3>CONTACT US</h3>
+          <div class="contact-row"><strong>전화</strong><span id="contactPhone">02-2144-0764, 0755</span></div>
+          <div class="contact-row"><strong>팩스</strong><span id="contactFax">02-2144-0759</span></div>
+          <div class="contact-row"><strong>이메일</strong><span id="contactEmail">kosac@ad.co.kr</span></div>
+          <div class="contact-row"><strong>주소</strong><span id="contactAddress">05510 서울시 송파구 올림픽로 35길 137(신천동) 한국광고문화회관 901호</span></div>
+
+          <a class="back-btn" href="./index.html">메인으로 돌아가기</a>
+        </div>
+
+        <div class="contact-card">
+          <h3>주최 · 주관</h3>
+          <div class="hosts">
+            <div class="host">
+              <small>주최</small>
+              <strong>문화체육관광부</strong>
+            </div>
+            <div class="host">
+              <small>주관</small>
+              <strong>한국광고총연합회</strong>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap footer-inner">
+    Copyright © KOSAC since 2017. All rights reserved.
+  </div>
+</footer>
+
+<script>
+const menuToggle=document.getElementById('menuToggle');
+const mainMenu=document.getElementById('mainMenu');
+
+if(menuToggle && mainMenu){
+  menuToggle.addEventListener('click',()=>{
+    const open=mainMenu.classList.toggle('open');
+    menuToggle.setAttribute('aria-expanded',String(open));
+  });
+
+  mainMenu.querySelectorAll('a').forEach(a=>{
+    a.addEventListener('click',()=>{
+      mainMenu.classList.remove('open');
+      menuToggle.setAttribute('aria-expanded','false');
+    });
+  });
+}
+
+
+// Tabs progressively enhance the three in-page sections; without JS all content remains readable.
+const tabList=document.querySelector('.tab-list');
+const tabs=Array.from(tabList.querySelectorAll('a'));
+const panels=Array.from(document.querySelectorAll('.tab-panel'));
+tabList.setAttribute('role','tablist');
+tabs.forEach(tab=>{tab.setAttribute('role','tab');tab.setAttribute('aria-controls',tab.hash.slice(1));});
+panels.forEach(panel=>{panel.setAttribute('role','tabpanel');panel.tabIndex=0;});
+function activateTab(id,scroll=false){
+  const target=panels.find(panel=>panel.id===id)||panels[0];
+  panels.forEach(panel=>{panel.hidden=panel!==target;});
+  tabs.forEach(tab=>{const active=tab.hash==='#'+target.id;tab.setAttribute('aria-selected',String(active));tab.tabIndex=active?0:-1;});
+  if(scroll)tabList.scrollIntoView({block:'start'});
+}
+function navigateTab(id,scroll){
+  history.pushState(null,'','#'+id);
+  activateTab(id,scroll);
+}
+tabs.forEach((tab,index)=>{
+  tab.addEventListener('click',event=>{event.preventDefault();navigateTab(tab.hash.slice(1),false);});
+  tab.addEventListener('keydown',event=>{
+    let next=null;
+    if(event.key==='ArrowRight')next=(index+1)%tabs.length;
+    if(event.key==='ArrowLeft')next=(index-1+tabs.length)%tabs.length;
+    if(event.key==='Home')next=0;
+    if(event.key==='End')next=tabs.length-1;
+    if(next!==null){event.preventDefault();tabs[next].focus();navigateTab(tabs[next].hash.slice(1),false);}
+  });
+});
+document.querySelectorAll('[data-next]').forEach(link=>link.addEventListener('click',event=>{event.preventDefault();const id=link.hash.slice(1);navigateTab(id,true);document.getElementById('tab-'+id).focus({preventScroll:true});}));
+window.addEventListener('hashchange',()=>activateTab(location.hash.slice(1)));
+window.addEventListener('popstate',()=>activateTab(location.hash.slice(1)));
+activateTab(location.hash.slice(1));
+document.addEventListener('keydown',event=>{if(event.key==='Escape' && mainMenu.classList.contains('open')){mainMenu.classList.remove('open');menuToggle.setAttribute('aria-expanded','false');menuToggle.focus();}});
+document.addEventListener('click',event=>{if(!event.target.closest('header')){mainMenu.classList.remove('open');menuToggle.setAttribute('aria-expanded','false');}});
+</script><script src="./kosac-content.js?v=20261006" defer data-page="guidelines"></script>
+</body></html>
