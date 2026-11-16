@@ -12,6 +12,7 @@
   <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script defer src="./config.js"></script>
   <script defer src="./notices.js"></script>
+  <script defer src="./kosac-content.js?v=20261116" data-page="notices"></script>
 </head>
 <body>
 <header>
@@ -53,38 +54,38 @@
       </button>
 
       <nav class="menu" id="mainMenu" aria-label="주 메뉴">
-        <a href="./about.html"><span class="material-icons" aria-hidden="true">rocket_launch</span><span>KOSAC 소개</span><small lang="en">ABOUT KOSAC</small></a>
-        <a href="./guidelines.html"><span class="material-icons" aria-hidden="true">description</span><span>시행요강</span><small lang="en">REQUIREMENTS</small></a>
-        <a href="./registration.html"><span class="material-icons" aria-hidden="true">cloud_upload</span><span>작품접수</span><small lang="en">REGISTRATION</small></a>
-        <a href="./gallery.html"><span class="material-icons" aria-hidden="true">photo_library</span><span>갤러리</span><small lang="en">GALLERY</small></a>
-        <a href="./sponsors.html"><span class="material-icons" aria-hidden="true">groups</span><span>후원사 소개</span><small lang="en">SPONSORS</small></a>
-        <a href="./notices.html" aria-current="page"><span class="material-icons" aria-hidden="true">campaign</span><span>공지사항</span><small lang="en">NOTICE &amp; NEWS</small></a>
+        <a href="./about.html"><span class="material-icons" aria-hidden="true">rocket_launch</span><span data-edit="nav_about_ko">KOSAC 소개</span><small lang="en" data-edit="nav_about_en">ABOUT KOSAC</small></a>
+        <a href="./guidelines.html"><span class="material-icons" aria-hidden="true">description</span><span data-edit="nav_guidelines_ko">시행요강</span><small lang="en" data-edit="nav_guidelines_en">REQUIREMENTS</small></a>
+        <a href="./registration.html"><span class="material-icons" aria-hidden="true">cloud_upload</span><span data-edit="nav_registration_ko">작품접수</span><small lang="en" data-edit="nav_registration_en">REGISTRATION</small></a>
+        <a href="./gallery.html"><span class="material-icons" aria-hidden="true">photo_library</span><span data-edit="nav_gallery_ko">갤러리</span><small lang="en" data-edit="nav_gallery_en">GALLERY</small></a>
+        <a href="./sponsors.html"><span class="material-icons" aria-hidden="true">groups</span><span data-edit="nav_sponsors_ko">후원사 소개</span><small lang="en" data-edit="nav_sponsors_en">SPONSORS</small></a>
+        <a href="./notices.html" aria-current="page"><span class="material-icons" aria-hidden="true">campaign</span><span data-edit="nav_notices_ko">공지사항</span><small lang="en" data-edit="nav_notices_en">NOTICE &amp; NEWS</small></a>
       </nav>
     </div>
   </div>
 </header>
 <main class="wrap page">
   <div class="page-intro">
-    <h1>공지사항</h1>
-    <p>KOSAC 대회 소식과 사무국 공지를 확인하세요.</p>
+    <h1 data-edit="notices_text_1">공지사항</h1>
+    <p data-edit="notices_text_2">KOSAC 대회 소식과 사무국 공지를 확인하세요.</p>
   </div>
   <section class="page-section" aria-labelledby="postedNotices">
-    <h2 id="postedNotices">사무국 공지</h2>
+    <h2 id="postedNotices" data-edit="notices_text_3">사무국 공지</h2>
       <div id="noticeBoard" aria-live="polite">
         <div class="empty">공지사항을 불러오는 중입니다.</div>
       </div>
-      <p class="setup" id="setupWarning" hidden>실시간 공지를 불러올 수 없어 기본 안내를 표시합니다.</p>
+      <p class="setup" id="setupWarning" hidden data-edit="notices_text_4">실시간 공지를 불러올 수 없어 기본 안내를 표시합니다.</p>
   </section>
   <article class="page-section" id="finals" aria-labelledby="finalsHeading">
-    <h2 id="finalsHeading">2026 KOSAC 영콘챌 전국대회 안내</h2>
-    <p class="event-date"><time datetime="2026-11-27T13:00:00+09:00">2026년 11월 27일(금) 13:00</time> ~ 18:00</p>
-    <p>한국광고문화회관 2층 대회의장</p>
-    <img class="event-poster" loading="lazy" src="./assets/kosac-2026-finals.webp" width="1496" height="852" alt="2026 KOSAC 영콘챌 전국대회. 11월 27일 금요일 13시부터 18시까지, 한국광고문화회관 2층 대회의장.">
+    <h2 id="finalsHeading" data-edit="notice_finals_title">2026 KOSAC 영콘챌 전국대회 안내</h2>
+    <p class="event-date" data-edit="notice_finals_date">2026년 11월 27일(금) 13:00 ~ 18:00</p>
+    <p data-edit="notices_text_6">한국광고문화회관 2층 대회의장</p>
+    <img class="event-poster" loading="lazy" src="./assets/kosac-2026-finals.webp" data-edit-src="notice_finals_poster" width="1496" height="852" alt="2026 KOSAC 영콘챌 전국대회. 11월 27일 금요일 13시부터 18시까지, 한국광고문화회관 2층 대회의장.">
   </article>
 </main>
 <footer>
-  <span>대한민국 대학생 광고대회 KOSAC</span>
-  <a href="./index.html#contact">사무국 연락처</a>
+  <span data-edit="shared_footer_title">대한민국 대학생 광고대회 KOSAC</span>
+  <a href="./index.html#contact" data-edit="shared_footer_contact">사무국 연락처</a>
 </footer>
 <div class="modal" id="noticeModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
   <div class="modal-panel">

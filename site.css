@@ -209,3 +209,5 @@ footer a { color: var(--blue); margin-left: 12px; }
   .sponsor-sidebar a { padding: 7px 5px; }
   .sponsor-material { padding: 6px 0; }
 }
+
+img[hidden] { display: none !important; }

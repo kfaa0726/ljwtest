@@ -12,6 +12,7 @@
   <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script defer src="./config.js"></script>
   <script defer src="./notices.js"></script>
+  <script defer src="./kosac-content.js?v=20261116" data-page="index"></script>
 </head>
 <body>
 <header>
@@ -53,31 +54,31 @@
       </button>
 
       <nav class="menu" id="mainMenu" aria-label="주 메뉴">
-        <a href="./about.html"><span class="material-icons" aria-hidden="true">rocket_launch</span><span>KOSAC 소개</span><small lang="en">ABOUT KOSAC</small></a>
-        <a href="./guidelines.html"><span class="material-icons" aria-hidden="true">description</span><span>시행요강</span><small lang="en">REQUIREMENTS</small></a>
-        <a href="./registration.html"><span class="material-icons" aria-hidden="true">cloud_upload</span><span>작품접수</span><small lang="en">REGISTRATION</small></a>
-        <a href="./gallery.html"><span class="material-icons" aria-hidden="true">photo_library</span><span>갤러리</span><small lang="en">GALLERY</small></a>
-        <a href="./sponsors.html"><span class="material-icons" aria-hidden="true">groups</span><span>후원사 소개</span><small lang="en">SPONSORS</small></a>
-        <a href="./notices.html"><span class="material-icons" aria-hidden="true">campaign</span><span>공지사항</span><small lang="en">NOTICE &amp; NEWS</small></a>
+        <a href="./about.html"><span class="material-icons" aria-hidden="true">rocket_launch</span><span data-edit="nav_about_ko">KOSAC 소개</span><small lang="en" data-edit="nav_about_en">ABOUT KOSAC</small></a>
+        <a href="./guidelines.html"><span class="material-icons" aria-hidden="true">description</span><span data-edit="nav_guidelines_ko">시행요강</span><small lang="en" data-edit="nav_guidelines_en">REQUIREMENTS</small></a>
+        <a href="./registration.html"><span class="material-icons" aria-hidden="true">cloud_upload</span><span data-edit="nav_registration_ko">작품접수</span><small lang="en" data-edit="nav_registration_en">REGISTRATION</small></a>
+        <a href="./gallery.html"><span class="material-icons" aria-hidden="true">photo_library</span><span data-edit="nav_gallery_ko">갤러리</span><small lang="en" data-edit="nav_gallery_en">GALLERY</small></a>
+        <a href="./sponsors.html"><span class="material-icons" aria-hidden="true">groups</span><span data-edit="nav_sponsors_ko">후원사 소개</span><small lang="en" data-edit="nav_sponsors_en">SPONSORS</small></a>
+        <a href="./notices.html"><span class="material-icons" aria-hidden="true">campaign</span><span data-edit="nav_notices_ko">공지사항</span><small lang="en" data-edit="nav_notices_en">NOTICE &amp; NEWS</small></a>
       </nav>
     </div>
   </div>
 </header>
 <main>
   <section class="hero" aria-labelledby="heroHeading">
-    <h1 id="heroHeading" class="visually-hidden">대한민국 대학생 광고대회 KOSAC</h1>
+    <h1 id="heroHeading" class="visually-hidden" data-edit="home_heading">대한민국 대학생 광고대회 KOSAC</h1>
     <div class="wrap">
-      <div class="hero-banner"><img src="./assets/kosac-2026-finals.webp" width="1496" height="852" alt="2026 KOSAC 영콘챌 전국대회. 11월 27일 금요일 13시부터 18시까지, 한국광고문화회관 2층 대회의장."></div>
+      <div class="hero-banner"><img src="./assets/kosac-2026-finals.webp" data-edit-src="home_poster" width="1496" height="852" alt="2026 KOSAC 영콘챌 전국대회. 11월 27일 금요일 13시부터 18시까지, 한국광고문화회관 2층 대회의장."></div>
     </div>
   </section>
 
   <div class="wrap info-grid">
     <section class="content" id="notice" aria-labelledby="noticeHeading">
       <div class="section-head">
-        <h2 id="noticeHeading">공지사항/뉴스</h2>
-        <a href="./notices.html">공지 더보기</a>
+        <h2 id="noticeHeading" data-edit="home_notice_heading">공지사항/뉴스</h2>
+        <a href="./notices.html" data-edit="home_more_notices">공지 더보기</a>
       </div>
-      <a class="notice-row" href="./notices.html#finals"><span class="notice-title">2026 KOSAC 영콘챌 전국대회 안내</span><span class="notice-date">11.27(금)</span></a>
+      <a class="notice-row" href="./notices.html#finals"><span class="notice-title" data-edit="notice_finals_title">2026 KOSAC 영콘챌 전국대회 안내</span><span class="notice-date" data-edit="notice_finals_short">11.27(금)</span></a>
       <div id="noticeBoard" aria-live="polite" data-limit="4">
         <div class="empty">공지사항을 불러오는 중입니다.</div>
       </div>
@@ -85,7 +86,7 @@
     </section>
 
     <section class="content" id="contact" aria-labelledby="contactHeading">
-      <div class="section-head"><h2 id="contactHeading">CONTACT US</h2></div>
+      <div class="section-head"><h2 id="contactHeading" data-edit="home_contact_title">CONTACT US</h2></div>
       <div class="contact-row"><span>전화</span><strong id="phone">02-2144-0764</strong></div>
       <div class="contact-row"><span>팩스</span><strong id="fax">02-2144-0759</strong></div>
       <div class="contact-row"><span>이메일</span><strong id="email">kosac@ad.co.kr</strong></div>
@@ -95,24 +96,24 @@
 
   <section class="wrap gallery" id="gallery" aria-labelledby="galleryHeading">
     <div class="section-head">
-      <h2 id="galleryHeading">코삭 갤러리</h2>
-      <a href="./gallery.html">더보기</a>
+      <h2 id="galleryHeading" data-edit="home_gallery_heading">코삭 갤러리</h2>
+      <a href="./gallery.html" data-edit="home_more_gallery">더보기</a>
     </div>
     <div class="gallery-grid">
-      <a href="./gallery.html#photo-5"><img src="./assets/gallery/kosac-a5.webp" alt="2026 KOSAC 영코삭 시상식" loading="lazy"></a>
-      <a href="./gallery.html#photo-4"><img src="./assets/gallery/kosac-a4.webp" alt="2026 KOSAC 전국대회 시상식" loading="lazy"></a>
-      <a href="./gallery.html#photo-3"><img src="./assets/gallery/kosac-a3.webp" alt="2026 KOSAC 전국대회 발표 2" loading="lazy"></a>
-      <a href="./gallery.html#photo-2"><img src="./assets/gallery/kosac-a2.webp" alt="2026 KOSAC 전국대회 발표 1" loading="lazy"></a>
-      <a href="./gallery.html#photo-1"><img src="./assets/gallery/kosac-a1.webp" alt="2026 KOSAC 전국대회 현장" loading="lazy"></a>
+      <a href="./gallery.html#photo-5"><img src="./assets/gallery/kosac-a5.webp" data-edit-src="gallery_image_5" data-edit-alt="gallery_label_5" alt="2026 KOSAC 영코삭 시상식" loading="lazy"></a>
+      <a href="./gallery.html#photo-4"><img src="./assets/gallery/kosac-a4.webp" data-edit-src="gallery_image_4" data-edit-alt="gallery_label_4" alt="2026 KOSAC 전국대회 시상식" loading="lazy"></a>
+      <a href="./gallery.html#photo-3"><img src="./assets/gallery/kosac-a3.webp" data-edit-src="gallery_image_3" data-edit-alt="gallery_label_3" alt="2026 KOSAC 전국대회 발표 2" loading="lazy"></a>
+      <a href="./gallery.html#photo-2"><img src="./assets/gallery/kosac-a2.webp" data-edit-src="gallery_image_2" data-edit-alt="gallery_label_2" alt="2026 KOSAC 전국대회 발표 1" loading="lazy"></a>
+      <a href="./gallery.html#photo-1"><img src="./assets/gallery/kosac-a1.webp" data-edit-src="gallery_image_1" data-edit-alt="gallery_label_1" alt="2026 KOSAC 전국대회 현장" loading="lazy"></a>
     </div>
   </section>
 
   <section class="wrap sponsor-promo" aria-labelledby="sponsorPromoHeading">
-    <h2 id="sponsorPromoHeading" lang="en">2026 KOSAC : Korea Student Advertising Competition</h2>
-    <a href="./sponsors.html">
+    <h2 id="sponsorPromoHeading" lang="en" data-edit="home_sponsor_title">2026 KOSAC : Korea Student Advertising Competition</h2>
+    <a href="./sponsors.html" data-edit-href="home_sponsor_link">
       <picture>
-        <source media="(max-width: 620px)" srcset="./assets/sponsors/banner-mobile.png" width="458" height="250">
-        <img src="./assets/sponsors/banner.png" width="550" height="214" alt="KOSAC 인턴십 후원사 소개 보기" loading="lazy">
+        <source media="(max-width: 620px)" srcset="./assets/sponsors/banner-mobile.png" data-edit-srcset="home_sponsor_mobile" width="458" height="250">
+        <img src="./assets/sponsors/banner.png" data-edit-src="home_sponsor_banner" width="550" height="214" alt="KOSAC 인턴십 후원사 소개 보기" loading="lazy">
       </picture>
     </a>
   </section>
@@ -122,19 +123,19 @@
       <div class="host-grid">
         <div class="host-card">
           <span>주최</span>
-          <strong>문화체육관광부</strong>
+          <strong data-edit="home_host">문화체육관광부</strong>
         </div>
         <div class="host-card">
           <span>주관</span>
-          <strong>한국광고총연합회</strong>
+          <strong data-edit="home_organizer">한국광고총연합회</strong>
         </div>
       </div>
     </div>
   </section>
 </main>
 <footer>
-  <span>대한민국 대학생 광고대회 KOSAC</span>
-  <a href="./index.html#contact">사무국 연락처</a>
+  <span data-edit="shared_footer_title">대한민국 대학생 광고대회 KOSAC</span>
+  <a href="./index.html#contact" data-edit="shared_footer_contact">사무국 연락처</a>
 </footer>
 <div class="modal" id="noticeModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
   <div class="modal-panel">

@@ -10,6 +10,9 @@
   <link rel="stylesheet" href="./site.css">
   <script defer src="./site-nav.js"></script>
   <script defer src="./sponsors.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script defer src="./config.js"></script>
+  <script defer src="./kosac-content.js?v=20261116" data-page="sponsors"></script>
 </head>
 <body>
 <header>
@@ -51,116 +54,116 @@
       </button>
 
       <nav class="menu" id="mainMenu" aria-label="주 메뉴">
-        <a href="./about.html"><span class="material-icons" aria-hidden="true">rocket_launch</span><span>KOSAC 소개</span><small lang="en">ABOUT KOSAC</small></a>
-        <a href="./guidelines.html"><span class="material-icons" aria-hidden="true">description</span><span>시행요강</span><small lang="en">REQUIREMENTS</small></a>
-        <a href="./registration.html"><span class="material-icons" aria-hidden="true">cloud_upload</span><span>작품접수</span><small lang="en">REGISTRATION</small></a>
-        <a href="./gallery.html"><span class="material-icons" aria-hidden="true">photo_library</span><span>갤러리</span><small lang="en">GALLERY</small></a>
-        <a href="./sponsors.html" aria-current="page"><span class="material-icons" aria-hidden="true">groups</span><span>후원사 소개</span><small lang="en">SPONSORS</small></a>
-        <a href="./notices.html"><span class="material-icons" aria-hidden="true">campaign</span><span>공지사항</span><small lang="en">NOTICE &amp; NEWS</small></a>
+        <a href="./about.html"><span class="material-icons" aria-hidden="true">rocket_launch</span><span data-edit="nav_about_ko">KOSAC 소개</span><small lang="en" data-edit="nav_about_en">ABOUT KOSAC</small></a>
+        <a href="./guidelines.html"><span class="material-icons" aria-hidden="true">description</span><span data-edit="nav_guidelines_ko">시행요강</span><small lang="en" data-edit="nav_guidelines_en">REQUIREMENTS</small></a>
+        <a href="./registration.html"><span class="material-icons" aria-hidden="true">cloud_upload</span><span data-edit="nav_registration_ko">작품접수</span><small lang="en" data-edit="nav_registration_en">REGISTRATION</small></a>
+        <a href="./gallery.html"><span class="material-icons" aria-hidden="true">photo_library</span><span data-edit="nav_gallery_ko">갤러리</span><small lang="en" data-edit="nav_gallery_en">GALLERY</small></a>
+        <a href="./sponsors.html" aria-current="page"><span class="material-icons" aria-hidden="true">groups</span><span data-edit="nav_sponsors_ko">후원사 소개</span><small lang="en" data-edit="nav_sponsors_en">SPONSORS</small></a>
+        <a href="./notices.html"><span class="material-icons" aria-hidden="true">campaign</span><span data-edit="nav_notices_ko">공지사항</span><small lang="en" data-edit="nav_notices_en">NOTICE &amp; NEWS</small></a>
       </nav>
     </div>
   </div>
 </header>
 <main class="sponsor-page">
   <div class="sponsor-title">
-    <div class="wrap"><h1>인턴십 후원사 소개</h1></div>
+    <div class="wrap"><h1 data-edit="sponsors_text_1">인턴십 후원사 소개</h1></div>
   </div>
   <div class="wrap sponsor-layout">
     <nav class="sponsor-sidebar" aria-label="인턴십 후원사 목록">
       <ul>
-        <li><a href="#pr-one">피알원</a></li>
-        <li><a href="#the-smc">The SMC</a></li>
-        <li><a href="#tbwa-korea">TBWA KOREA</a></li>
-        <li><a href="#ad-rich">애드리치</a></li>
-        <li><a href="#big-band">빅밴드앤코</a></li>
-        <li><a href="#dream-insight">드림인사이트</a></li>
-        <li><a href="#spring-and-flower">스프링앤플라워</a></li>
-        <li><a href="#wisebirds">와이즈버즈</a></li>
-        <li><a href="#runlab">RUNLAB</a></li>
-        <li><a href="#j4d">J4D</a></li>
+        <li><a href="#pr-one" data-edit="sponsor_name_pr-one">피알원</a></li>
+        <li><a href="#the-smc" data-edit="sponsor_name_the-smc">The SMC</a></li>
+        <li><a href="#tbwa-korea" data-edit="sponsor_name_tbwa-korea">TBWA KOREA</a></li>
+        <li><a href="#ad-rich" data-edit="sponsor_name_ad-rich">애드리치</a></li>
+        <li><a href="#big-band" data-edit="sponsor_name_big-band">빅밴드앤코</a></li>
+        <li><a href="#dream-insight" data-edit="sponsor_name_dream-insight">드림인사이트</a></li>
+        <li><a href="#spring-and-flower" data-edit="sponsor_name_spring-and-flower">스프링앤플라워</a></li>
+        <li><a href="#wisebirds" data-edit="sponsor_name_wisebirds">와이즈버즈</a></li>
+        <li><a href="#runlab" data-edit="sponsor_name_runlab">RUNLAB</a></li>
+        <li><a href="#j4d" data-edit="sponsor_name_j4d">J4D</a></li>
       </ul>
     </nav>
     <div class="sponsor-profiles">
       <article class="sponsor-profile" id="pr-one" aria-labelledby="pr-one-name">
-        <h2 id="pr-one-name">피알원</h2>
+        <h2 id="pr-one-name" data-edit="sponsor_name_pr-one">피알원</h2>
         <div class="sponsor-material">
-          <img src="./assets/sponsors/profile-19.webp" width="750" height="4700" alt="피알원 회사 소개 자료" fetchpriority="high">
+          <img src="./assets/sponsors/profile-19.webp" data-edit-src="sponsor_image_19" width="750" height="4700" alt="피알원 회사 소개 자료" fetchpriority="high">
           <ul class="sponsor-company-links">
-            <li><a href="http://www.prone.co.kr/">피알원 홈페이지</a></li>
+            <li><a href="http://www.prone.co.kr/" data-edit-href="sponsor_link_1">피알원 홈페이지</a></li>
           </ul>
         </div>
       </article>
       <article class="sponsor-profile" id="the-smc" aria-labelledby="the-smc-name">
-        <h2 id="the-smc-name">The SMC</h2>
+        <h2 id="the-smc-name" data-edit="sponsor_name_the-smc">The SMC</h2>
         <div class="sponsor-material">
-          <img src="./assets/sponsors/profile-20.webp" width="750" height="11805" alt="The SMC 회사 소개 자료" loading="lazy">
+          <img src="./assets/sponsors/profile-20.webp" data-edit-src="sponsor_image_20" width="750" height="11805" alt="The SMC 회사 소개 자료" loading="lazy">
           <ul class="sponsor-company-links">
-            <li><a href="https://thesmc.co.kr">The SMC 홈페이지</a></li>
-            <li><a href="https://thesmc.co.kr/works">캠페인 포트폴리오</a></li>
-            <li><a href="https://careers.thesmc.co.kr/">채용 정보</a></li>
-            <li><a href="https://gogumafarm.kr/">뉴미디어 트렌드</a></li>
+            <li><a href="https://thesmc.co.kr" data-edit-href="sponsor_link_2">The SMC 홈페이지</a></li>
+            <li><a href="https://thesmc.co.kr/works" data-edit-href="sponsor_link_3">캠페인 포트폴리오</a></li>
+            <li><a href="https://careers.thesmc.co.kr/" data-edit-href="sponsor_link_4">채용 정보</a></li>
+            <li><a href="https://gogumafarm.kr/" data-edit-href="sponsor_link_5">뉴미디어 트렌드</a></li>
           </ul>
         </div>
       </article>
       <article class="sponsor-profile" id="tbwa-korea" aria-labelledby="tbwa-korea-name">
-        <h2 id="tbwa-korea-name">TBWA KOREA</h2>
+        <h2 id="tbwa-korea-name" data-edit="sponsor_name_tbwa-korea">TBWA KOREA</h2>
         <div class="sponsor-material">
-          <img src="./assets/sponsors/profile-22.webp" width="950" height="8012" alt="TBWA KOREA 회사 소개 자료" loading="lazy">
+          <img src="./assets/sponsors/profile-22.webp" data-edit-src="sponsor_image_22" width="950" height="8012" alt="TBWA KOREA 회사 소개 자료" loading="lazy">
         </div>
       </article>
       <article class="sponsor-profile" id="ad-rich" aria-labelledby="ad-rich-name">
-        <h2 id="ad-rich-name">애드리치</h2>
+        <h2 id="ad-rich-name" data-edit="sponsor_name_ad-rich">애드리치</h2>
         <div class="sponsor-material">
-          <img src="./assets/sponsors/profile-23.webp" width="900" height="6793" alt="애드리치 회사 소개 자료" loading="lazy">
+          <img src="./assets/sponsors/profile-23.webp" data-edit-src="sponsor_image_23" width="900" height="6793" alt="애드리치 회사 소개 자료" loading="lazy">
         </div>
       </article>
       <article class="sponsor-profile" id="big-band" aria-labelledby="big-band-name">
-        <h2 id="big-band-name">빅밴드앤코</h2>
+        <h2 id="big-band-name" data-edit="sponsor_name_big-band">빅밴드앤코</h2>
         <div class="sponsor-material">
-          <img src="./assets/sponsors/profile-24.webp" width="750" height="3600" alt="빅밴드앤코 회사 소개 자료" loading="lazy">
+          <img src="./assets/sponsors/profile-24.webp" data-edit-src="sponsor_image_24" width="750" height="3600" alt="빅밴드앤코 회사 소개 자료" loading="lazy">
         </div>
       </article>
       <article class="sponsor-profile" id="dream-insight" aria-labelledby="dream-insight-name">
-        <h2 id="dream-insight-name">드림인사이트</h2>
+        <h2 id="dream-insight-name" data-edit="sponsor_name_dream-insight">드림인사이트</h2>
         <div class="sponsor-material">
-          <img src="./assets/sponsors/profile-27.webp" width="750" height="4400" alt="드림인사이트 회사 소개 자료" loading="lazy">
+          <img src="./assets/sponsors/profile-27.webp" data-edit-src="sponsor_image_27" width="750" height="4400" alt="드림인사이트 회사 소개 자료" loading="lazy">
         </div>
       </article>
       <article class="sponsor-profile" id="spring-and-flower" aria-labelledby="spring-and-flower-name">
-        <h2 id="spring-and-flower-name">스프링앤플라워</h2>
+        <h2 id="spring-and-flower-name" data-edit="sponsor_name_spring-and-flower">스프링앤플라워</h2>
         <div class="sponsor-material">
-          <img src="./assets/sponsors/profile-28.webp" width="750" height="4760" alt="스프링앤플라워 회사 소개 자료" loading="lazy">
+          <img src="./assets/sponsors/profile-28.webp" data-edit-src="sponsor_image_28" width="750" height="4760" alt="스프링앤플라워 회사 소개 자료" loading="lazy">
         </div>
       </article>
       <article class="sponsor-profile" id="wisebirds" aria-labelledby="wisebirds-name">
-        <h2 id="wisebirds-name">와이즈버즈</h2>
+        <h2 id="wisebirds-name" data-edit="sponsor_name_wisebirds">와이즈버즈</h2>
         <div class="sponsor-material">
-          <img src="./assets/sponsors/profile-21.webp" width="750" height="5000" alt="와이즈버즈 회사 소개 자료" loading="lazy">
+          <img src="./assets/sponsors/profile-21.webp" data-edit-src="sponsor_image_21" width="750" height="5000" alt="와이즈버즈 회사 소개 자료" loading="lazy">
         </div>
       </article>
       <article class="sponsor-profile" id="runlab" aria-labelledby="runlab-name">
-        <h2 id="runlab-name">RUNLAB</h2>
+        <h2 id="runlab-name" data-edit="sponsor_name_runlab">RUNLAB</h2>
         <div class="sponsor-material">
-          <img src="./assets/sponsors/profile-31.webp" width="750" height="4565" alt="RUNLAB 회사 소개 자료" loading="lazy">
+          <img src="./assets/sponsors/profile-31.webp" data-edit-src="sponsor_image_31" width="750" height="4565" alt="RUNLAB 회사 소개 자료" loading="lazy">
         </div>
       </article>
       <article class="sponsor-profile" id="j4d" aria-labelledby="j4d-name">
-        <h2 id="j4d-name">J4D</h2>
+        <h2 id="j4d-name" data-edit="sponsor_name_j4d">J4D</h2>
         <div class="sponsor-material">
-          <img src="./assets/sponsors/profile-32.webp" width="950" height="6145" alt="J4D 회사 소개 자료" loading="lazy">
+          <img src="./assets/sponsors/profile-32.webp" data-edit-src="sponsor_image_32" width="950" height="6145" alt="J4D 회사 소개 자료" loading="lazy">
         </div>
       </article>
     </div>
   </div>
   <section class="wrap page-section sponsor-benefits" aria-labelledby="benefitsHeading">
     <h2 id="benefitsHeading">후원사 인턴십</h2>
-    <p>2026 KOSAC 시행요강에 따라 참여 후원사는 전국대회 PT를 바탕으로 인턴십 면접 대상자를 선발합니다. 면접과 채용 세부 사항은 참여 후원사가 정합니다.</p>
-    <div class="page-links"><a href="./guidelines.html#awards">시상내역 및 수상혜택</a></div>
+    <p data-edit="sponsors_text_28">2026 KOSAC 시행요강에 따라 참여 후원사는 전국대회 PT를 바탕으로 인턴십 면접 대상자를 선발합니다. 면접과 채용 세부 사항은 참여 후원사가 정합니다.</p>
+    <div class="page-links"><a href="./guidelines.html#awards" data-edit="sponsors_text_29">시상내역 및 수상혜택</a></div>
   </section>
 </main>
 <footer>
-  <span>대한민국 대학생 광고대회 KOSAC</span>
-  <a href="./index.html#contact">사무국 연락처</a>
+  <span data-edit="shared_footer_title">대한민국 대학생 광고대회 KOSAC</span>
+  <a href="./index.html#contact" data-edit="shared_footer_contact">사무국 연락처</a>
 </footer>
 </body>
 </html>

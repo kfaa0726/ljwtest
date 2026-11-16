@@ -1,527 +1,84 @@
 <!doctype html>
 <html lang="ko">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#ffffff">
-<title>KOSAC 소개 | 대한민국 대학생 광고대회</title>
-
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="./config.js"></script>
-
-<style>
-:root{
-  --bg:#f6f8fb;
-  --card:#ffffff;
-  --text:#111827;
-  --muted:#6b7280;
-  --line:#e5e7eb;
-  --navy:#173a6f;
-  --blue:#315b9e;
-  --blue2:#5f7fb7;
-  --soft:#eef4fb;
-  --soft2:#f8fafc;
-}
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{
-  margin:0;
-  background:var(--bg);
-  color:var(--text);
-  font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Noto Sans KR","Segoe UI",sans-serif;
-  word-break:keep-all;
-}
-a{text-decoration:none;color:inherit}
-.wrap{width:min(1180px,calc(100% - 36px));margin:auto}
-
-/* header */
-header{
-  position:sticky;
-  top:0;
-  z-index:30;
-  background:rgba(255,255,255,.94);
-  border-bottom:1px solid var(--line);
-  backdrop-filter:blur(14px);
-}
-.nav{
-  min-height:84px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:20px;
-}
-.brand-row{
-  display:flex;
-  align-items:center;
-  gap:12px;
-}
-.logo img{
-  display:block;
-  width:186px;
-  height:auto;
-}
-.socials{display:flex;gap:7px}
-.social{
-  width:36px;height:36px;
-  border:1px solid var(--line);
-  border-radius:10px;
-  background:#fff;
-  display:grid;
-  place-items:center;
-  transition:.18s ease;
-}
-.social:hover{transform:translateY(-1px);box-shadow:0 6px 16px rgba(15,23,42,.08)}
-.social svg{width:18px;height:18px}
-.menu{
-  display:flex;
-  align-items:center;
-  gap:26px;
-  font-size:14px;
-  font-weight:800;
-  color:#465162;
-}
-.menu a:hover{color:var(--blue)}
-
-.menu-toggle{
-  display:none;
-  align-items:center;
-  justify-content:center;
-  gap:7px;
-  min-height:40px;
-  padding:0 13px;
-  border:1px solid var(--line);
-  border-radius:11px;
-  background:#fff;
-  color:#263244;
-  font-size:13px;
-  font-weight:900;
-}
-.menu-toggle .bars{
-  width:17px;
-  height:12px;
-  position:relative;
-  display:inline-block;
-}
-.menu-toggle .bars:before,
-.menu-toggle .bars:after,
-.menu-toggle .bars span{
-  content:"";
-  position:absolute;
-  left:0;
-  width:100%;
-  height:2px;
-  border-radius:2px;
-  background:#263244;
-}
-.menu-toggle .bars:before{top:0}
-.menu-toggle .bars span{top:5px}
-.menu-toggle .bars:after{bottom:0}
-
-/* hero */
-.hero{
-  padding:76px 0 54px;
-}
-.hero-card{
-  position:relative;
-  overflow:hidden;
-  border:1px solid #e4eaf2;
-  border-radius:30px;
-  background:linear-gradient(135deg,#ffffff 0%,#f4f7fb 62%,#eaf1fa 100%);
-  padding:62px 58px;
-}
-.hero-card:after{
-  content:"";
-  position:absolute;
-  right:-80px;
-  top:-90px;
-  width:320px;
-  height:320px;
-  border-radius:50%;
-  background:rgba(49,91,158,.08);
-}
-.eyebrow{
-  display:inline-flex;
-  align-items:center;
-  gap:8px;
-  font-size:12px;
-  font-weight:900;
-  letter-spacing:.14em;
-  color:var(--blue);
-}
-.hero h1{
-  margin:13px 0 18px;
-  font-size:clamp(42px,6vw,72px);
-  line-height:1.05;
-  letter-spacing:-.065em;
-}
-.hero-lead{
-  max-width:820px;
-  margin:0;
-  color:#4b5563;
-  font-size:19px;
-  line-height:1.85;
-  font-weight:650;
-}
-.hero-sub{
-  max-width:860px;
-  margin:18px 0 0;
-  color:#6b7280;
-  font-size:15px;
-  line-height:1.9;
-}
-
-/* sections */
-.section{padding:28px 0 70px}
-.section-head{
-  display:flex;
-  justify-content:space-between;
-  align-items:flex-end;
-  gap:24px;
-  margin-bottom:24px;
-}
-.section-head small{
-  display:block;
-  margin-bottom:6px;
-  color:var(--blue);
-  font-size:11px;
-  font-weight:900;
-  letter-spacing:.12em;
-}
-.section-head h2{
-  margin:0;
-  font-size:34px;
-  letter-spacing:-.05em;
-}
-.section-head p{
-  margin:0;
-  max-width:600px;
-  color:var(--muted);
-  font-size:13px;
-  line-height:1.7;
-  text-align:right;
-}
-
-/* feature grid */
-.features{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:14px;
-}
-.feature{
-  min-height:230px;
-  padding:25px;
-  border:1px solid var(--line);
-  border-radius:22px;
-  background:#fff;
-  transition:.18s ease;
-}
-.feature:hover{
-  transform:translateY(-2px);
-  box-shadow:0 12px 30px rgba(15,23,42,.06);
-}
-.feature-num{
-  width:36px;height:36px;
-  display:grid;place-items:center;
-  margin-bottom:25px;
-  border-radius:11px;
-  background:var(--soft);
-  color:var(--blue);
-  font-size:12px;
-  font-weight:950;
-}
-.feature h3{
-  margin:0;
-  font-size:20px;
-  line-height:1.45;
-  letter-spacing:-.035em;
-}
-.feature p{
-  margin:11px 0 0;
-  color:#6b7280;
-  font-size:13px;
-  line-height:1.75;
-}
-
-/* background */
-.reason-list{
-  display:grid;
-  gap:12px;
-}
-.reason{
-  display:grid;
-  grid-template-columns:66px minmax(0,1fr);
-  gap:22px;
-  padding:27px 28px;
-  background:#fff;
-  border:1px solid var(--line);
-  border-radius:20px;
-}
-.reason-no{
-  width:52px;height:52px;
-  display:grid;place-items:center;
-  border-radius:16px;
-  background:var(--navy);
-  color:#fff;
-  font-size:16px;
-  font-weight:900;
-}
-.reason h3{
-  margin:1px 0 9px;
-  font-size:19px;
-  line-height:1.5;
-  letter-spacing:-.03em;
-}
-.reason p{
-  margin:0;
-  color:#667085;
-  font-size:14px;
-  line-height:1.85;
-}
-
-/* overview */
-.overview{
-  display:grid;
-  grid-template-columns:1.05fr .95fr;
-  gap:16px;
-}
-.overview-card{
-  padding:30px;
-  background:#fff;
-  border:1px solid var(--line);
-  border-radius:22px;
-}
-.overview-card.dark{
-  background:#17243a;
-  color:#fff;
-  border-color:#17243a;
-}
-.badge{
-  display:inline-flex;
-  padding:7px 10px;
-  border-radius:999px;
-  background:var(--soft);
-  color:var(--blue);
-  font-size:10px;
-  font-weight:900;
-}
-.dark .badge{
-  background:rgba(255,255,255,.12);
-  color:#fff;
-}
-.overview-card h3{
-  margin:14px 0 18px;
-  font-size:27px;
-  letter-spacing:-.04em;
-}
-.info-row{
-  display:grid;
-  grid-template-columns:90px 1fr;
-  gap:12px;
-  padding:12px 0;
-  border-top:1px solid #edf0f4;
-  font-size:14px;
-  line-height:1.7;
-}
-.dark .info-row{border-top-color:rgba(255,255,255,.12)}
-.info-row strong{font-size:12px;color:#667085}
-.dark .info-row strong{color:#b9c5d6}
-.info-row span{color:#303947}
-.dark .info-row span{color:#f5f7fb}
-.note{
-  margin-top:18px;
-  color:#8992a0;
-  font-size:11px;
-  line-height:1.7;
-}
-.dark .note{color:#aeb9c8}
-
-/* contact */
-.contact{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:16px;
-}
-.contact-card{
-  padding:28px;
-  border:1px solid var(--line);
-  border-radius:22px;
-  background:#fff;
-}
-.contact-card h3{
-  margin:0 0 18px;
-  font-size:22px;
-  letter-spacing:-.04em;
-}
-.contact-row{
-  display:grid;
-  grid-template-columns:76px 1fr;
-  gap:14px;
-  padding:10px 0;
-  border-top:1px solid #eef1f4;
-  font-size:13px;
-  line-height:1.65;
-}
-.contact-row:first-of-type{border-top:0}
-.contact-row strong{color:#7b8491;font-size:11px}
-.hosts{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:10px;
-}
-.host{
-  padding:20px;
-  border-radius:16px;
-  background:var(--soft2);
-  border:1px solid #edf0f3;
-}
-.host small{display:block;color:#8b95a3;font-size:10px;font-weight:900}
-.host strong{display:block;margin-top:5px;font-size:17px}
-
-/* footer */
-footer{
-  margin-top:12px;
-  border-top:1px solid var(--line);
-  background:#fff;
-}
-.footer-inner{
-  padding:27px 0 34px;
-  color:#949ba5;
-  font-size:11px;
-  line-height:1.8;
-}
-.back-btn{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  min-height:42px;
-  margin-top:20px;
-  padding:0 15px;
-  border-radius:11px;
-  background:var(--navy);
-  color:#fff;
-  font-size:12px;
-  font-weight:900;
-}
-
-@media(max-width:900px){
-  .features{grid-template-columns:1fr 1fr}
-  .overview,.contact{grid-template-columns:1fr}
-  .section-head{display:block}
-  .section-head p{text-align:left;margin-top:8px}
-}
-@media(max-width:650px){
-  .wrap{width:min(100% - 22px,1180px)}
-  .nav{min-height:72px}
-  .logo img{width:145px}
-  .social{width:32px;height:32px}
-  .menu-toggle{display:flex}
-  .nav{position:relative}
-  .menu{
-    display:none;
-    position:absolute;
-    top:calc(100% + 1px);
-    left:0;
-    right:0;
-    flex-direction:column;
-    align-items:stretch;
-    gap:0;
-    padding:10px;
-    background:#fff;
-    border:1px solid var(--line);
-    border-radius:0 0 16px 16px;
-    box-shadow:0 14px 28px rgba(15,23,42,.08);
-  }
-  .menu.open{display:flex}
-  .menu a{
-    display:block;
-    padding:14px 12px;
-    border-radius:10px;
-    font-size:14px;
-  }
-  .menu a:hover{background:#f5f7fa}
-  .hero{padding:34px 0 26px}
-  .hero-card{padding:34px 24px;border-radius:22px}
-  .hero-lead{font-size:16px}
-  .hero-sub{font-size:13px}
-  .section{padding:22px 0 48px}
-  .section-head h2{font-size:28px}
-  .features{grid-template-columns:1fr}
-  .feature{min-height:auto}
-  .reason{grid-template-columns:48px minmax(0,1fr);gap:15px;padding:22px 18px}
-  .reason-no{width:44px;height:44px;border-radius:13px}
-  .hosts{grid-template-columns:1fr}
-}
-
-@media(max-width:1000px){.menu{gap:14px;font-size:13px}}
-@media(max-width:760px){.menu-toggle{display:flex}.nav{position:relative}.menu{display:none;position:absolute;top:calc(100% + 1px);left:0;right:0;flex-direction:column;align-items:stretch;gap:0;padding:10px;background:white;border:1px solid var(--line);border-radius:0 0 16px 16px}.menu.open{display:flex}.menu a{padding:14px 12px}}
-@media(max-width:360px){.logo img{width:125px}.social{width:28px;height:28px}.socials{gap:5px}.brand-row{gap:8px}.menu-toggle{padding:0 9px}.nav{gap:8px}}
-</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="KOSAC 소개 | 대한민국 대학생 광고대회">
+  <title>KOSAC 소개 | KOSAC</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo+Black&amp;display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="./site.css?v=20261116">
+  <link rel="stylesheet" href="./documents.css">
+  <script defer src="./site-nav.js"></script>
+  <script defer src="./document-sections.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script defer src="./config.js"></script>
+  <script defer src="./kosac-content.js?v=20261116" data-page="about"></script>
 </head>
-
 <body>
 <header>
   <div class="wrap nav">
-    <div class="brand-row">
-      <a class="logo" href="./index.html">
-        <img src="./kosac-logo.png" alt="KOSAC 로고">
+    <div class="brand-group">
+      <a class="logo-link" href="./index.html" aria-current="page" aria-label="KOSAC 홈">
+        KOSAC
       </a>
+
       <div class="socials">
-        <a class="social" href="https://www.youtube.com/@kosac9720" target="_blank" rel="noopener" aria-label="KOSAC YouTube">
+        <a class="social-btn youtube" href="https://www.youtube.com/@kosac9720" target="_blank" rel="noopener noreferrer" aria-label="KOSAC YouTube">
           <svg viewBox="0 0 24 24" aria-hidden="true">
-            <path fill="#ff0000" d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8Z"/>
-            <path fill="#fff" d="m9.6 15.6 6.2-3.6-6.2-3.6v7.2Z"/>
+            <path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8ZM9.6 15.6V8.4l6.2 3.6-6.2 3.6Z"/>
           </svg>
         </a>
-        <a class="social" href="https://www.instagram.com/kosac_official" target="_blank" rel="noopener" aria-label="KOSAC Instagram">
+
+        <a class="social-btn instagram" href="https://www.instagram.com/kosac_official" target="_blank" rel="noopener noreferrer" aria-label="KOSAC Instagram">
           <svg viewBox="0 0 24 24" aria-hidden="true">
             <defs>
-              <linearGradient id="ig" x1="0" y1="1" x2="1" y2="0">
-                <stop offset="0" stop-color="#ffdc80"/>
-                <stop offset=".35" stop-color="#fcaf45"/>
-                <stop offset=".58" stop-color="#f77737"/>
-                <stop offset=".78" stop-color="#c13584"/>
-                <stop offset="1" stop-color="#405de6"/>
+              <linearGradient id="igGradient" x1="0" y1="1" x2="1" y2="0">
+                <stop offset="0%" stop-color="#ffcc70"/>
+                <stop offset="38%" stop-color="#ff4b55"/>
+                <stop offset="70%" stop-color="#b33ab4"/>
+                <stop offset="100%" stop-color="#515bd4"/>
               </linearGradient>
             </defs>
-            <rect x="2" y="2" width="20" height="20" rx="6" fill="url(#ig)"/>
-            <circle cx="12" cy="12" r="4.2" fill="none" stroke="#fff" stroke-width="1.8"/>
-            <circle cx="17.5" cy="6.6" r="1.2" fill="#fff"/>
+            <rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="url(#igGradient)" stroke-width="2"/>
+            <circle cx="12" cy="12" r="4" fill="none" stroke="url(#igGradient)" stroke-width="2"/>
+            <circle cx="17.5" cy="6.5" r="1.1" fill="url(#igGradient)"/>
           </svg>
         </a>
       </div>
+      <p class="brand-caption">Korea Student Advertising<br>Competition</p>
     </div>
 
-    <button class="menu-toggle" id="menuToggle" type="button" aria-expanded="false" aria-controls="mainMenu">
-      <span class="bars"><span></span></span>
-      메뉴
-    </button>
+    <div class="header-right">
+      <button class="menu-toggle" id="menuToggle" type="button" aria-expanded="false" aria-controls="mainMenu">
+        메뉴
+      </button>
 
-    <nav class="menu" id="mainMenu">
-      <a href="./about.html" aria-current="page">KOSAC 소개</a>
-      <a href="./guidelines.html">시행요강</a>
-      <a href="./registration.html">작품접수</a>
-      <a href="./gallery.html">갤러리</a>
-      <a href="./sponsors.html">후원사 소개</a>
-      <a href="./notices.html">공지사항</a>
-    </nav>
+      <nav class="menu" id="mainMenu" aria-label="주 메뉴">
+        <a href="./about.html" aria-current="page"><span class="material-icons" aria-hidden="true">rocket_launch</span><span data-edit="nav_about_ko">KOSAC 소개</span><small lang="en" data-edit="nav_about_en">ABOUT KOSAC</small></a>
+        <a href="./guidelines.html"><span class="material-icons" aria-hidden="true">description</span><span data-edit="nav_guidelines_ko">시행요강</span><small lang="en" data-edit="nav_guidelines_en">REQUIREMENTS</small></a>
+        <a href="./registration.html"><span class="material-icons" aria-hidden="true">cloud_upload</span><span data-edit="nav_registration_ko">작품접수</span><small lang="en" data-edit="nav_registration_en">REGISTRATION</small></a>
+        <a href="./gallery.html"><span class="material-icons" aria-hidden="true">photo_library</span><span data-edit="nav_gallery_ko">갤러리</span><small lang="en" data-edit="nav_gallery_en">GALLERY</small></a>
+        <a href="./sponsors.html"><span class="material-icons" aria-hidden="true">groups</span><span data-edit="nav_sponsors_ko">후원사 소개</span><small lang="en" data-edit="nav_sponsors_en">SPONSORS</small></a>
+        <a href="./notices.html"><span class="material-icons" aria-hidden="true">campaign</span><span data-edit="nav_notices_ko">공지사항</span><small lang="en" data-edit="nav_notices_en">NOTICE &amp; NEWS</small></a>
+      </nav>
+    </div>
   </div>
 </header>
-
-<main>
-  <section class="hero">
-    <div class="wrap">
-      <div class="hero-card">
-        <div class="eyebrow"><!--cms:about_001-->ABOUT KOSAC<!--/cms:about_001--></div>
-        <h1><!--cms:about_002-->KOSAC 소개<!--/cms:about_002--></h1>
-        <p class="hero-lead" id="aboutText"><!--cms:about_lead-->대한민국 대학생 광고대회(KOSAC)는 광고산업 활성화와 예비 광고인들의 실무능력 향상을 목표로 마련된 국내 대표 산학연계 프로그램입니다.<!--/cms:about_lead--></p>
-        <p class="hero-sub"><!--cms:about_004-->문화체육관광부의 지원과 광고업계 및 학계의 후원으로 개최되며,
-          참가자들이 조사·기획·제작·프레젠테이션에 이르는 광고 캠페인 전 과정을 경험할 수 있도록 운영됩니다.<!--/cms:about_004--></p>
-      </div>
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="wrap">
+<main class="document-page">
+  <div class="sponsor-title"><div class="wrap"><h1><!--cms:about_002-->KOSAC 소개<!--/cms:about_002--></h1></div></div>
+  <div class="wrap document-layout">
+    <nav class="document-nav" aria-label="KOSAC 소개 하위 메뉴"><ul>
+        <li><a href="#everyone"><span data-edit="about_tab_everyone">모두의 KOSAC</span></a></li>
+        <li><a href="#overview"><span data-edit="about_tab_overview">About KOSAC</span></a></li>
+        <li><a href="#committee"><span data-edit="about_tab_committee">전국집행위원</span></a></li>
+        <li><a href="#contact"><span data-edit="about_tab_contact">CONTACT US</span></a></li>
+    </ul></nav>
+    <div class="document-sections">
+<section class="document-section" id="everyone" aria-labelledby="everyone-title"><h2 class="document-bar" id="everyone-title"><span data-edit="about_tab_everyone">모두의 KOSAC</span></h2><div class="document-body"><a href="https://youngkosac.ad.co.kr/" data-edit-href="about_everyone_link"><img src="./assets/intro/everyone.webp" width="1150" height="3373" data-edit-src="about_everyone_image" alt="모두의 KOSAC 안내 배너"></a></div></section>
+<section class="document-section" id="overview" aria-labelledby="overview-title"><h2 class="document-bar" id="overview-title"><!--cms:about_001-->ABOUT KOSAC<!--/cms:about_001--></h2><div class="document-body"><p class="about-lead"><!--cms:about_lead-->대한민국 대학생 광고대회(KOSAC)는 광고산업 활성화와 예비 광고인들의 실무능력 향상을 목표로 마련된 국내 대표 산학연계 프로그램입니다.<!--/cms:about_lead--></p><p class="about-summary"><!--cms:about_004-->문화체육관광부의 지원과 광고업계 및 학계의 후원으로 개최되며,
+          참가자들이 조사·기획·제작·프레젠테이션에 이르는 광고 캠페인 전 과정을 경험할 수 있도록 운영됩니다.<!--/cms:about_004--></p><div class="about-photo"><img src="./assets/intro/about.webp" width="1150" height="767" data-edit-src="about_photo" alt="KOSAC 2026 대회 현장 사진"></div><section class="about-content">
+    <div>
       <div class="section-head">
         <div>
           <small><!--cms:about_005-->KOSAC EXPERIENCE<!--/cms:about_005--></small>
@@ -532,46 +89,44 @@ footer{
 
       <div class="features">
         <article class="feature">
-          <div class="feature-num">01</div>
+          <span class="feature-dot" aria-hidden="true"></span>
           <h3><!--cms:about_008-->국내 광고계 최대의<!--/cms:about_008--><br><!--cms:about_009-->산학연계 프로그램<!--/cms:about_009--></h3>
           <p><!--cms:about_010-->정부·업계·학계가 함께 추진하며 국내 광고 관련 인사가 대거 참여합니다.<!--/cms:about_010--></p>
         </article>
 
         <article class="feature">
-          <div class="feature-num">02</div>
+          <span class="feature-dot" aria-hidden="true"></span>
           <h3><!--cms:about_011-->수상자 취업을 위한<!--/cms:about_011--><br><!--cms:about_012-->광고계 차원의 노력<!--/cms:about_012--></h3>
           <p><!--cms:about_013-->인턴십 연계 등 수상자의 광고업계 진출을 위한 실질적인 연계 기회를 확대합니다.<!--/cms:about_013--></p>
         </article>
 
         <article class="feature">
-          <div class="feature-num">03</div>
+          <span class="feature-dot" aria-hidden="true"></span>
           <h3><!--cms:about_014-->학과 수업 연계 및<!--/cms:about_014--><br><!--cms:about_015-->지도 교수 참여<!--/cms:about_015--></h3>
           <p><!--cms:about_016-->교수의 지도 아래 한 학기 동안 진행되며 전국 광고 관련 학과가 수업과 연계하여 참여합니다.<!--/cms:about_016--></p>
         </article>
 
         <article class="feature">
-          <div class="feature-num">04</div>
+          <span class="feature-dot" aria-hidden="true"></span>
           <h3><!--cms:about_017-->공개 경쟁 PT 심사 및<!--/cms:about_017--><br><!--cms:about_018-->시상식<!--/cms:about_018--></h3>
           <p><!--cms:about_019-->예비 광고인의 공개 경쟁의 장이자 현장 교육과 축제가 함께 이루어지는 자리입니다.<!--/cms:about_019--></p>
         </article>
 
         <article class="feature">
-          <div class="feature-num">05</div>
+          <span class="feature-dot" aria-hidden="true"></span>
           <h3><!--cms:about_020-->심사위원들의 생생한<!--/cms:about_020--><br><!--cms:about_021-->피드백 경험<!--/cms:about_021--></h3>
           <p><!--cms:about_022-->수상팀 멘토링을 통해 출품작에 대한 피드백을 받고 업계 네트워크를 구축할 수 있습니다.<!--/cms:about_022--></p>
         </article>
 
         <article class="feature">
-          <div class="feature-num">06</div>
+          <span class="feature-dot" aria-hidden="true"></span>
           <h3><!--cms:about_023-->경쟁 PT 전 과정을<!--/cms:about_023--><br><!--cms:about_024-->직접 경험<!--/cms:about_024--></h3>
           <p><!--cms:about_025-->조사·기획·제작·PT에 이르는 광고 캠페인의 전체 과정을 대상으로 합니다.<!--/cms:about_025--></p>
         </article>
       </div>
     </div>
-  </section>
-
-  <section class="section">
-    <div class="wrap">
+  </section><section class="about-content">
+    <div>
       <div class="section-head">
         <div>
           <small><!--cms:about_026-->WHY KOSAC<!--/cms:about_026--></small>
@@ -605,10 +160,8 @@ footer{
         </article>
       </div>
     </div>
-  </section>
-
-  <section class="section">
-    <div class="wrap">
+  </section><section class="about-content">
+    <div>
       <div class="section-head">
         <div>
           <small><!--cms:about_034-->COMPETITION OVERVIEW<!--/cms:about_034--></small>
@@ -659,71 +212,31 @@ footer{
         </div>
       </div>
     </div>
-  </section>
-
-  <section class="section">
-    <div class="wrap">
-      <div class="section-head">
-        <div>
-          <small>CONTACT</small>
-          <h2>대한민국 대학생 광고대회</h2>
-        </div>
-      </div>
-
-      <div class="contact">
-        <div class="contact-card">
-          <h3>CONTACT US</h3>
-          <div class="contact-row"><strong>전화</strong><span id="contactPhone">02-2144-0764, 0755</span></div>
-          <div class="contact-row"><strong>팩스</strong><span id="contactFax">02-2144-0759</span></div>
-          <div class="contact-row"><strong>이메일</strong><span id="contactEmail">kosac@ad.co.kr</span></div>
-          <div class="contact-row"><strong>주소</strong><span id="contactAddress">05510 서울시 송파구 올림픽로 35길 137(신천동) 한국광고문화회관 901호</span></div>
-
-          <a class="back-btn" href="./index.html">메인으로 돌아가기</a>
-        </div>
-
-        <div class="contact-card">
-          <h3>주최 · 주관</h3>
-          <div class="hosts">
-            <div class="host">
-              <small>주최</small>
-              <strong>문화체육관광부</strong>
-            </div>
-            <div class="host">
-              <small>주관</small>
-              <strong>한국광고총연합회</strong>
-            </div>
-          </div>
-        </div>
-      </div>
+  </section></div></section>
+<section class="document-section" id="committee" aria-labelledby="committee-title"><h2 class="document-bar" id="committee-title"><span data-edit="about_tab_committee">전국집행위원</span></h2><div class="document-body"><h3 data-edit="about_committee_head">집행위원회를 통한 공정성 확보</h3>
+<p data-edit="about_committee_intro">KOSAC은 집행위원회와 광고업계 심사위원회를 운영해 대회 진행과 심사의 공정성을 높이고 있습니다.</p>
+<div class="table-wrap"><table class="committee-table"><thead><tr><th scope="col">성명</th><th scope="col">소속</th><th scope="col">직위</th></tr></thead><tbody>
+<tr><td data-edit="about_member_1_0">이구익</td><td data-edit="about_member_1_1">계원예술대학교 영상디자인과</td><td data-edit="about_member_1_2">교수 (전국집행위원장)</td></tr>
+<tr><td data-edit="about_member_2_0">김재민</td><td data-edit="about_member_2_1">한양대학교 ERICA 광고홍보학과</td><td data-edit="about_member_2_2">교수</td></tr>
+<tr><td data-edit="about_member_3_0">김태은</td><td data-edit="about_member_3_1">순천향대학교 미디어커뮤니케이션학과</td><td data-edit="about_member_3_2">교수</td></tr>
+<tr><td data-edit="about_member_4_0">박소연</td><td data-edit="about_member_4_1">피알원</td><td data-edit="about_member_4_2">상무</td></tr>
+<tr><td data-edit="about_member_5_0">방윤수</td><td data-edit="about_member_5_1">SM C&amp;C</td><td data-edit="about_member_5_2">제작그룹장</td></tr>
+<tr><td data-edit="about_member_6_0">이태호</td><td data-edit="about_member_6_1">우아한형제들</td><td data-edit="about_member_6_2">팀장</td></tr>
+<tr><td data-edit="about_member_7_0">최정인</td><td data-edit="about_member_7_1">J4D</td><td data-edit="about_member_7_2">대표</td></tr>
+</tbody></table></div></div></section>
+<section class="document-section" id="contact" aria-labelledby="contact-title"><h2 class="document-bar" id="contact-title"><span data-edit="about_tab_contact">CONTACT US</span></h2><div class="document-body"><h3 data-edit="about_contact_heading">연락처</h3>
+<div class="contact-row"><span>주소</span><strong data-contact="address">05510 서울시 송파구 올림픽로 35길 137(신천동) 한국광고문화회관 901호</strong></div>
+<div class="contact-row"><span>전화</span><strong data-contact="phone">02-2144-0764</strong></div>
+<div class="contact-row"><span>팩스</span><strong data-contact="fax">02-2144-0759</strong></div>
+<div class="contact-row"><span>이메일</span><strong data-contact="email">kosac@ad.co.kr</strong></div>
+<h3 data-edit="about_map_heading">찾아오시는 길</h3>
+<img src="./assets/intro/map.webp" width="1150" height="772" data-edit-src="about_map_image" alt="한국광고문화회관 찾아오시는 길 약도"></div></section>
     </div>
-  </section>
-</main>
-
-<footer>
-  <div class="wrap footer-inner">
-    Copyright © KOSAC since 2017. All rights reserved.
   </div>
+</main>
+<footer>
+  <span data-edit="shared_footer_title">대한민국 대학생 광고대회 KOSAC</span>
+  <a href="./index.html#contact" data-edit="shared_footer_contact">사무국 연락처</a>
 </footer>
-
-<script>
-const menuToggle=document.getElementById('menuToggle');
-const mainMenu=document.getElementById('mainMenu');
-
-if(menuToggle && mainMenu){
-  menuToggle.addEventListener('click',()=>{
-    const open=mainMenu.classList.toggle('open');
-    menuToggle.setAttribute('aria-expanded',String(open));
-  });
-
-  mainMenu.querySelectorAll('a').forEach(a=>{
-    a.addEventListener('click',()=>{
-      mainMenu.classList.remove('open');
-      menuToggle.setAttribute('aria-expanded','false');
-    });
-  });
-}
-
-</script>
-<script src="./kosac-content.js?v=20261006" defer data-page="about"></script>
 </body>
 </html>
