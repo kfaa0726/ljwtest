@@ -31,9 +31,8 @@ header { background: white; position: sticky; top: 0; z-index: 20; }
 .menu small { color: #737b96; font-size: 9px; font-weight: 700; }
 .material-icons { font-size: 24px; margin-bottom: 3px; }
 .menu-toggle { display: none; }
- .hero-banner { display: block; }
+.hero-banner { display: block; }
 .hero-banner img { display: block; width: 100%; height: auto; }
-.hero-banner:hover { outline: 2px solid var(--blue); outline-offset: -2px; }
 .info-grid { display: grid; grid-template-columns: minmax(0, 1.07fr) minmax(0, 1fr); gap: 48px; padding-top: 32px; }
 .content, .gallery { scroll-margin-top: 132px; }
 .section-head { display: flex; align-items: baseline; flex-wrap: wrap; gap: 8px 15px; border-bottom: 2px solid var(--accent); padding-bottom: 7px; }
@@ -158,13 +157,11 @@ footer { padding: 22px 18px 30px; text-align: center; color: var(--muted); backg
 .page-links { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
 .page-links a { color: var(--blue); border: 1px solid #a8c6cd; padding: 7px 14px; font-weight: 700; }
 .page-links a:hover { background: #edf8f8; }
-.gallery-archive, .sponsor-list { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+.gallery-archive { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
 .gallery-archive figure { margin: 0; border: 1px solid var(--line); scroll-margin-top: 132px; }
 .gallery-archive figure:target { outline: 2px solid var(--blue); }
 .gallery-archive img { width: 100%; height: auto; display: block; aspect-ratio: 1.3; object-fit: cover; }
-.gallery-archive figcaption, .sponsor-list li { padding: 10px 12px; font-size: 14px; font-weight: 700; }
-.sponsor-list { padding: 0; list-style: none; }
-.sponsor-list li { background: #f7fafa; border: 1px solid #d9e6e6; }
+.gallery-archive figcaption { padding: 10px 12px; font-size: 14px; font-weight: 700; }
 .event-poster { display: block; width: min(720px,100%); height: auto; margin-top: 16px; }
 .event-date { font-weight: 700; }
 .faq details { border-bottom: 1px solid var(--line); padding: 12px 4px; }
@@ -174,5 +171,41 @@ footer a { color: var(--blue); margin-left: 12px; }
   .page-section, .gallery-archive figure { scroll-margin-top: 75px; }
 }
 @media (max-width: 620px) {
-  .gallery-archive, .sponsor-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .gallery-archive { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+.sponsor-promo { margin-top: 48px; }
+.sponsor-promo h2 { color: var(--accent); margin: 0 0 11px; font-size: 20px; line-height: 1.4; letter-spacing: -.035em; }
+.sponsor-promo a { display: block; width: min(700px, 100%); }
+.sponsor-promo img { display: block; width: 100%; height: auto; }
+.sponsor-promo a:hover img { filter: brightness(.97); }
+
+.sponsor-page { padding-bottom: 52px; }
+.sponsor-title { background: #f2f1ef; padding: 27px 0; }
+.sponsor-title h1 { color: #131313; margin: 0; font-size: clamp(26px, 4vw, 36px); font-weight: 850; letter-spacing: -.06em; }
+.sponsor-layout { display: grid; grid-template-columns: minmax(160px, 23.5%) minmax(0, 1fr); gap: 15px; align-items: start; }
+.sponsor-sidebar { position: sticky; top: 120px; }
+.sponsor-sidebar ul { list-style: none; margin: 0; padding: 0; }
+.sponsor-sidebar a { display: block; padding: 9px 5px; color: #4c5360; border-bottom: 1px solid #e8e8e8; font-weight: 650; }
+.sponsor-sidebar a:hover, .sponsor-sidebar a[aria-current="location"] { color: #084cab; background: #f1f6ff; }
+.sponsor-profile { scroll-margin-top: 120px; }
+.sponsor-profile h2 { background: #0e68f1; color: white; margin: 0; padding: 9px 16px; font-size: 20px; }
+.sponsor-material { padding: 8px; }
+.sponsor-material img { width: 100%; height: auto; display: block; }
+.sponsor-company-links { display: flex; flex-wrap: wrap; gap: 8px 20px; padding: 0; list-style: none; }
+.sponsor-company-links a { color: #084cab; text-decoration: underline; }
+.sponsor-benefits { margin-top: 40px; }
+@media (max-width: 950px) {
+  .sponsor-sidebar { top: 64px; }
+  .sponsor-profile { scroll-margin-top: 64px; }
+}
+@media (max-width: 620px) {
+  .sponsor-promo { margin-top: 34px; }
+  .sponsor-promo h2 { font-size: 17px; }
+  .sponsor-title { padding: 19px 0; }
+  .sponsor-layout { grid-template-columns: 1fr; gap: 12px; }
+  .sponsor-sidebar { position: static; }
+  .sponsor-sidebar ul { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 8px; }
+  .sponsor-sidebar a { padding: 7px 5px; }
+  .sponsor-material { padding: 6px 0; }
 }
