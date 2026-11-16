@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="KOSAC 대회 소식과 사무국 안내">
+  <title>공지사항 | KOSAC</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo+Black&amp;display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="./site.css">
+  <script defer src="./site-nav.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script defer src="./config.js"></script>
+  <script defer src="./notices.js"></script>
+</head>
+<body>
+<header>
+  <div class="wrap nav">
+    <div class="brand-group">
+      <a class="logo-link" href="./index.html" aria-label="KOSAC 홈">
+        KOSAC
+      </a>
+
+      <div class="socials">
+        <a class="social-btn youtube" href="https://www.youtube.com/@kosac9720" target="_blank" rel="noopener noreferrer" aria-label="KOSAC YouTube">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8ZM9.6 15.6V8.4l6.2 3.6-6.2 3.6Z"/>
+          </svg>
+        </a>
+
+        <a class="social-btn instagram" href="https://www.instagram.com/kosac_official" target="_blank" rel="noopener noreferrer" aria-label="KOSAC Instagram">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <defs>
+              <linearGradient id="igGradient" x1="0" y1="1" x2="1" y2="0">
+                <stop offset="0%" stop-color="#ffcc70"/>
+                <stop offset="38%" stop-color="#ff4b55"/>
+                <stop offset="70%" stop-color="#b33ab4"/>
+                <stop offset="100%" stop-color="#515bd4"/>
+              </linearGradient>
+            </defs>
+            <rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="url(#igGradient)" stroke-width="2"/>
+            <circle cx="12" cy="12" r="4" fill="none" stroke="url(#igGradient)" stroke-width="2"/>
+            <circle cx="17.5" cy="6.5" r="1.1" fill="url(#igGradient)"/>
+          </svg>
+        </a>
+      </div>
+      <p class="brand-caption">Korea Student Advertising<br>Competition</p>
+    </div>
+
+    <div class="header-right">
+      <button class="menu-toggle" id="menuToggle" type="button" aria-expanded="false" aria-controls="mainMenu">
+        메뉴
+      </button>
+
+      <nav class="menu" id="mainMenu" aria-label="주 메뉴">
+        <a href="./about.html"><span class="material-icons" aria-hidden="true">rocket_launch</span><span>KOSAC 소개</span><small lang="en">ABOUT KOSAC</small></a>
+        <a href="./guidelines.html"><span class="material-icons" aria-hidden="true">description</span><span>시행요강</span><small lang="en">REQUIREMENTS</small></a>
+        <a href="./registration.html"><span class="material-icons" aria-hidden="true">cloud_upload</span><span>작품접수</span><small lang="en">REGISTRATION</small></a>
+        <a href="./gallery.html"><span class="material-icons" aria-hidden="true">photo_library</span><span>갤러리</span><small lang="en">GALLERY</small></a>
+        <a href="./sponsors.html"><span class="material-icons" aria-hidden="true">groups</span><span>후원사 소개</span><small lang="en">SPONSORS</small></a>
+        <a href="./notices.html" aria-current="page"><span class="material-icons" aria-hidden="true">campaign</span><span>공지사항</span><small lang="en">NOTICE &amp; NEWS</small></a>
+      </nav>
+    </div>
+  </div>
+</header>
+<main class="wrap page">
+  <div class="page-intro">
+    <h1>공지사항</h1>
+    <p>KOSAC 대회 소식과 사무국 공지를 확인하세요.</p>
+  </div>
+  <section class="page-section" aria-labelledby="postedNotices">
+    <h2 id="postedNotices">사무국 공지</h2>
+      <div id="noticeBoard" aria-live="polite">
+        <div class="empty">공지사항을 불러오는 중입니다.</div>
+      </div>
+      <p class="setup" id="setupWarning" hidden>실시간 공지를 불러올 수 없어 기본 안내를 표시합니다.</p>
+  </section>
+  <article class="page-section" id="finals" aria-labelledby="finalsHeading">
+    <h2 id="finalsHeading">2026 KOSAC 영콘챌 전국대회 안내</h2>
+    <p class="event-date"><time datetime="2026-11-27T13:00:00+09:00">2026년 11월 27일(금) 13:00</time> ~ 18:00</p>
+    <p>한국광고문화회관 2층 대회의장</p>
+    <img class="event-poster" loading="lazy" src="./assets/kosac-2026-finals.webp" width="1496" height="852" alt="2026 KOSAC 영콘챌 전국대회. 11월 27일 금요일 13시부터 18시까지, 한국광고문화회관 2층 대회의장.">
+  </article>
+</main>
+<footer>
+  <span>대한민국 대학생 광고대회 KOSAC</span>
+  <a href="./index.html#contact">사무국 연락처</a>
+</footer>
+<div class="modal" id="noticeModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <div class="modal-panel">
+    <div class="modal-head">
+      <h3 id="modalTitle"></h3>
+      <button class="close" id="closeModal" type="button" aria-label="닫기">×</button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-meta">
+        <span class="notice-tag" id="modalCategory"></span>
+        <span class="notice-tag" id="modalDate"></span>
+      </div>
+      <div class="body" id="modalBody"></div>
+
+      <div class="modal-actions" id="modalActions">
+        <a class="modal-action primary" id="modalFile" href="#" target="_blank" rel="noopener">
+          첨부파일 다운로드
+        </a>
+        <a class="modal-action" id="modalLink" href="#" target="_blank" rel="noopener">
+          관련 링크 열기
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

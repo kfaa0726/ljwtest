@@ -1,195 +1,23 @@
 <!doctype html>
 <html lang="ko">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#ffffff">
-<meta name="description" content="2027 대한민국 대학생 광고대회 KOSAC 임시 홈페이지">
-<title>2027 KOSAC | 임시 홈페이지</title>
-
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="./config.js"></script>
-
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo+Black&amp;display=swap">
-<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-<style>
-
-:root {
-  --ink: #242632;
-  --muted: #626a78;
-  --nav: #505977;
-  --accent: #806c46;
-  --line: #ece9e0;
-  --blue: #244a72;
-  --blue-dark: #173a6f;
-  --soft: #edf3fb;
-}
-* { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
-body { margin: 0; background: white; color: var(--ink); font: 15px/1.6 "Noto Sans KR", "Apple SD Gothic Neo", sans-serif; }
-a { color: inherit; text-decoration: none; }
-button { font: inherit; }
-:focus-visible { outline: 2px solid var(--blue); outline-offset: 4px; }
-.wrap { width: min(1000px, calc(100% - 36px)); margin-inline: auto; }
-header { background: white; position: sticky; top: 0; z-index: 20; }
-.nav { min-height: 120px; display: flex; justify-content: space-between; align-items: center; gap: 20px; }
-.brand-group { display: grid; grid-template-columns: max-content max-content; align-items: center; column-gap: 10px; }
-.logo-link { color: #111; font: 900 42px/1 "Archivo Black", sans-serif; letter-spacing: -.055em; }
-.brand-caption { grid-column: 1 / -1; margin: 8px 0 0; color: var(--muted); font-size: 10px; font-weight: 700; line-height: 1.25; }
-.socials { display: flex; align-items: center; gap: 6px; }
-.social-btn { width: 23px; height: 26px; display: grid; place-items: center; }
-.social-btn svg { width: 20px; height: 20px; }
-.social-btn.youtube svg { fill: #d90000; }
-.menu { display: flex; }
-.menu a { min-width: 112px; padding: 4px 13px; display: grid; justify-items: center; color: var(--nav); line-height: 1.45; font-weight: 750; border-right: 1px solid #f0f0f0; white-space: nowrap; }
-.menu a:last-child { border-right: 0; }
-.menu a:hover { background: #f4f6fa; }
-.menu small { color: #737b96; font-size: 9px; font-weight: 700; }
-.material-icons { font-size: 24px; margin-bottom: 3px; }
-.menu-toggle { display: none; }
-.hero { padding: 0; }
-.hero-panel {
-  min-height: 540px;
-  display: grid;
-  grid-template-columns: 1.1fr 1fr;
-  align-items: center;
-  gap: 30px;
-  padding: 50px clamp(24px, 6vw, 70px);
-  background: radial-gradient(ellipse at 82% 18%, #d8ffff 0%, transparent 46%), linear-gradient(145deg, #c7f4f7, #7cdee9 62%, #ccf8f8);
-  color: #123b4b;
-}
-.hero-note { font-size: 14px; font-weight: 800; margin: 0 0 14px; }
-.hero h1 { margin: 0; font: 900 clamp(64px, 8vw, 105px)/.92 "Archivo Black", sans-serif; letter-spacing: -.085em; }
-.hero h1 span { display: block; }
-.hero-desc { margin: 22px 0 0; font-size: 15px; max-width: 305px; }
-.hero-mark { position: relative; display: grid; aspect-ratio: 1; place-items: center; border-radius: 50%; border: 1px solid #f2ffff; background: radial-gradient(circle at 38% 28%, #e8ffff, #68d8e8 62%, #2eacc1); box-shadow: 0 20px 45px #248caa35, inset 0 0 0 16px #ecffff5c; }
-.hero-mark:hover { filter: brightness(1.05); }
-.hero-mark::before, .hero-mark::after { position: absolute; content: ""; border: 1px solid #efffffba; border-radius: 50%; inset: 20%; }
-.hero-mark::after { inset: 32%; }
-.hero-mark span { position: relative; z-index: 1; color: #155873; width: 0; height: 0; border-top: clamp(26px, 5vw, 60px) solid transparent; border-bottom: clamp(26px, 5vw, 60px) solid transparent; border-left: clamp(39px, 8vw, 90px) solid currentColor; transform: translateX(12%); }
-.info-grid { display: grid; grid-template-columns: minmax(0, 1.07fr) minmax(0, 1fr); gap: 48px; padding-top: 32px; }
-.content, .gallery { scroll-margin-top: 132px; }
-.section-head { display: flex; align-items: baseline; flex-wrap: wrap; gap: 8px 15px; border-bottom: 2px solid var(--accent); padding-bottom: 7px; }
-.section-head h2 { color: var(--accent); margin: 0; font-size: 20px; line-height: 1.4; }
-.section-head a { margin-left: auto; color: var(--accent); border: 1px solid var(--accent); border-radius: 999px; padding: 1px 12px; font-size: 11px; font-weight: 700; }
-.section-head a:hover { background: #f5f0e8; }
-.notice-row { display: grid; grid-template-columns: minmax(0, 1fr) auto; width: 100%; align-items: center; gap: 8px; padding: 10px 4px; text-align: left; color: inherit; background: white; border: 0; border-bottom: 1px solid var(--line); cursor: pointer; }
-.notice-row:hover { background: #f8f7f2; }
-.notice-title { min-width: 0; font-size: 13px; font-weight: 650; }
-.notice-date { color: var(--muted); font-size: 11px; }
-.notice-tag { display: inline-flex; padding: 4px 8px; border-radius: 999px; background: var(--soft); color: var(--blue); font-size: 11px; font-weight: 750; }
-.empty { padding: 14px 4px; color: var(--muted); font-size: 13px; }
-.contact-row { display: grid; grid-template-columns: 49px 1fr; gap: 10px; padding: 7px 4px; border-bottom: 1px solid var(--line); font-size: 13px; }
-.contact-row span { color: var(--muted); }
-.contact-row strong { font-weight: 600; overflow-wrap: anywhere; }
-.gallery { margin-top: 52px; }
-.gallery-grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 10px; margin-top: 15px; }
-.gallery-grid a { display: block; border: 1px solid var(--accent); padding: 3px; }
-.gallery-grid img { width: 100%; display: block; aspect-ratio: 1.2; object-fit: cover; background: #f1f1f1; }
-.gallery-grid a:hover img { filter: brightness(.9); }
-.hosts { margin-top: 50px; text-align: center; border-top: 1px solid var(--line); padding: 21px 0; }
-.host-grid { display: flex; justify-content: center; flex-wrap: wrap; gap: 12px 35px; }
-.host-card { font-size: 14px; }
-.host-card span { color: var(--muted); margin-right: 8px; font-size: 12px; }
-footer { padding: 22px 18px 30px; text-align: center; color: var(--muted); background: #f7f7f5; font-size: 11px; }
-.setup { color: var(--muted); margin: 8px 0 0; font-size: 12px; }
-@media (max-width: 950px) {
-  .nav { min-height: 64px; position: relative; }
-  .logo-link { font-size: 31px; }
-  .brand-caption { display: none; }
-  .menu-toggle { display: block; padding: 5px 13px; background: white; border: 1px solid #cbcdd3; border-radius: 5px; color: var(--nav); cursor: pointer; }
-  .menu { display: none; position: absolute; top: 100%; left: 0; right: 0; background: white; border: 1px solid var(--line); padding: 8px; box-shadow: 0 8px 18px #202b3d16; }
-  .menu.open { display: grid; grid-template-columns: repeat(3, 1fr); }
-  .menu a { min-width: 0; padding: 8px 2px; border: 0; font-size: 13px; }
-  .menu small { font-size: 8px; }
-  .hero-panel { min-height: 420px; }
-  .content, .gallery { scroll-margin-top: 80px; }
-}
-@media (max-width: 620px) {
-  .wrap { width: calc(100% - 28px); }
-  .hero > .wrap { width: 100%; }
-  .hero-panel { min-height: auto; grid-template-columns: 1fr; justify-items: center; text-align: center; padding: 35px 18px 28px; gap: 24px; }
-  .hero-mark { width: min(56vw, 210px); }
-  .hero h1 { font-size: clamp(52px, 15vw, 82px); }
-  .hero-desc { margin: 18px auto 0; }
-  .info-grid { grid-template-columns: 1fr; gap: 25px; padding-top: 25px; }
-  .gallery { margin-top: 35px; }
-  .gallery-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-}
-@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
-
-/* Notice dialog */
-.modal{
-  display:none;
-  position:fixed;
-  inset:0;
-  z-index:100;
-  background:rgba(0,0,0,.58);
-  padding:20px;
-  overflow:auto;
-}
-.modal.show{display:block}
-.modal-panel{
-  width:min(720px,100%);
-  min-height:min(520px,75vh);
-  min-height:min(520px,75dvh);
-  margin:46px auto;
-  background:#fff;
-  border-radius:22px;
-  overflow:hidden;
-}
-.modal-head{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:16px;
-  padding:22px 24px;
-  border-bottom:1px solid var(--line);
-}
-.modal-head h3{margin:0;font-size:22px}
-.close{
-  width:38px;height:38px;border:0;border-radius:50%;
-  background:#f0f2f4;font-size:20px;cursor:pointer;
-}
-.modal-body{padding:24px}
-.modal-meta{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
-.modal-body .body{white-space:pre-wrap;color:#53606f;line-height:1.9}
-.modal-actions{
-  display:none;
-  gap:8px;
-  flex-wrap:wrap;
-  margin-top:22px;
-  padding-top:18px;
-  border-top:1px solid var(--line);
-}
-.modal-actions.show{display:flex}
-.modal-action{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  min-height:42px;
-  padding:0 14px;
-  border:1px solid var(--line);
-  border-radius:11px;
-  background:#fff;
-  color:#354052;
-  font-size:12px;
-  font-weight:900;
-}
-.modal-action.primary{
-  background:var(--blue-dark);
-  border-color:var(--blue-dark);
-  color:#fff;
-}
-
-</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="KOSAC 대회 안내, 공지사항 및 대회 현장">
+  <title>대한민국 대학생 광고대회 | KOSAC</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo+Black&amp;display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="./site.css">
+  <script defer src="./site-nav.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script defer src="./config.js"></script>
+  <script defer src="./notices.js"></script>
 </head>
 <body>
-
 <header>
   <div class="wrap nav">
     <div class="brand-group">
-      <a class="logo-link" href="./index.html" aria-label="KOSAC 홈">
+      <a class="logo-link" href="./index.html" aria-current="page" aria-label="KOSAC 홈">
         KOSAC
       </a>
 
@@ -224,29 +52,22 @@ footer { padding: 22px 18px 30px; text-align: center; color: var(--muted); backg
         메뉴
       </button>
 
-      <nav class="menu" id="mainMenu">
+      <nav class="menu" id="mainMenu" aria-label="주 메뉴">
         <a href="./about.html"><span class="material-icons" aria-hidden="true">rocket_launch</span><span>KOSAC 소개</span><small lang="en">ABOUT KOSAC</small></a>
         <a href="./guidelines.html"><span class="material-icons" aria-hidden="true">description</span><span>시행요강</span><small lang="en">REQUIREMENTS</small></a>
-        <a href="#registration"><span class="material-icons" aria-hidden="true">cloud_upload</span><span>작품접수</span><small lang="en">REGISTRATION</small></a>
-        <a href="#gallery"><span class="material-icons" aria-hidden="true">photo_library</span><span>갤러리</span><small lang="en">GALLERY</small></a>
-        <a href="https://kosac.ad.co.kr/pages/19"><span class="material-icons" aria-hidden="true">groups</span><span>후원사 소개</span><small lang="en">SPONSORS</small></a>
-        <a href="#notice"><span class="material-icons" aria-hidden="true">campaign</span><span>공지사항</span><small lang="en">NOTICE &amp; NEWS</small></a>
+        <a href="./registration.html"><span class="material-icons" aria-hidden="true">cloud_upload</span><span>작품접수</span><small lang="en">REGISTRATION</small></a>
+        <a href="./gallery.html"><span class="material-icons" aria-hidden="true">photo_library</span><span>갤러리</span><small lang="en">GALLERY</small></a>
+        <a href="./sponsors.html"><span class="material-icons" aria-hidden="true">groups</span><span>후원사 소개</span><small lang="en">SPONSORS</small></a>
+        <a href="./notices.html"><span class="material-icons" aria-hidden="true">campaign</span><span>공지사항</span><small lang="en">NOTICE &amp; NEWS</small></a>
       </nav>
     </div>
   </div>
 </header>
-
 <main>
-  <section class="hero">
+  <section class="hero" aria-labelledby="heroHeading">
+    <h1 id="heroHeading" class="visually-hidden">대한민국 대학생 광고대회 KOSAC</h1>
     <div class="wrap">
-      <div class="hero-panel">
-        <div>
-          <p class="hero-note">대한민국 대학생 광고대회</p>
-          <h1>2027 <span>KOSAC</span></h1>
-          <p class="hero-desc">KOSAC 임시 홈페이지입니다. 대회 안내와 공지사항을 확인하실 수 있습니다.</p>
-        </div>
-        <a class="hero-mark" href="https://www.youtube.com/@kosac9720" aria-label="KOSAC 유튜브 영상 보기"><span aria-hidden="true"></span></a>
-      </div>
+      <a class="hero-banner" href="./notices.html#finals"><img src="./assets/kosac-2026-finals.webp" width="1496" height="852" alt="2026 KOSAC 영콘챌 전국대회. 11월 27일 금요일 13시부터 18시까지, 한국광고문화회관 2층 대회의장."></a>
     </div>
   </section>
 
@@ -254,9 +75,10 @@ footer { padding: 22px 18px 30px; text-align: center; color: var(--muted); backg
     <section class="content" id="notice" aria-labelledby="noticeHeading">
       <div class="section-head">
         <h2 id="noticeHeading">공지사항/뉴스</h2>
-        <a href="https://kosac.ad.co.kr/pages/10/bulletins">공식 공지 더보기</a>
+        <a href="./notices.html">공지 더보기</a>
       </div>
-      <div id="noticeBoard" aria-live="polite">
+      <a class="notice-row" href="./notices.html#finals"><span class="notice-title">2026 KOSAC 영콘챌 전국대회 안내</span><span class="notice-date">11.27(금)</span></a>
+      <div id="noticeBoard" aria-live="polite" data-limit="4">
         <div class="empty">공지사항을 불러오는 중입니다.</div>
       </div>
       <p class="setup" id="setupWarning" hidden>실시간 공지를 불러올 수 없어 기본 안내를 표시합니다.</p>
@@ -274,20 +96,15 @@ footer { padding: 22px 18px 30px; text-align: center; color: var(--muted); backg
   <section class="wrap gallery" id="gallery" aria-labelledby="galleryHeading">
     <div class="section-head">
       <h2 id="galleryHeading">코삭 갤러리</h2>
-      <a href="https://kosac.ad.co.kr/pages/14/bulletins">더보기</a>
+      <a href="./gallery.html">더보기</a>
     </div>
     <div class="gallery-grid">
-      <a href="https://kosac.ad.co.kr/pages/9/bulletins/1789"><img src="./assets/gallery/kosac-a5.webp" alt="2026 KOSAC 영코삭 시상식" loading="lazy"></a>
-      <a href="https://kosac.ad.co.kr/pages/9/bulletins/1788"><img src="./assets/gallery/kosac-a4.webp" alt="2026 KOSAC 전국대회 시상식" loading="lazy"></a>
-      <a href="https://kosac.ad.co.kr/pages/9/bulletins/1787"><img src="./assets/gallery/kosac-a3.webp" alt="2026 KOSAC 전국대회 발표 2" loading="lazy"></a>
-      <a href="https://kosac.ad.co.kr/pages/9/bulletins/1786"><img src="./assets/gallery/kosac-a2.webp" alt="2026 KOSAC 전국대회 발표 1" loading="lazy"></a>
-      <a href="https://kosac.ad.co.kr/pages/9/bulletins/1785"><img src="./assets/gallery/kosac-a1.webp" alt="2026 KOSAC 전국대회 현장" loading="lazy"></a>
+      <a href="./gallery.html#photo-5"><img src="./assets/gallery/kosac-a5.webp" alt="2026 KOSAC 영코삭 시상식" loading="lazy"></a>
+      <a href="./gallery.html#photo-4"><img src="./assets/gallery/kosac-a4.webp" alt="2026 KOSAC 전국대회 시상식" loading="lazy"></a>
+      <a href="./gallery.html#photo-3"><img src="./assets/gallery/kosac-a3.webp" alt="2026 KOSAC 전국대회 발표 2" loading="lazy"></a>
+      <a href="./gallery.html#photo-2"><img src="./assets/gallery/kosac-a2.webp" alt="2026 KOSAC 전국대회 발표 1" loading="lazy"></a>
+      <a href="./gallery.html#photo-1"><img src="./assets/gallery/kosac-a1.webp" alt="2026 KOSAC 전국대회 현장" loading="lazy"></a>
     </div>
-  </section>
-
-  <section class="wrap gallery content" id="registration" aria-labelledby="registrationHeading">
-    <div class="section-head"><h2 id="registrationHeading">작품접수</h2></div>
-    <p>2027년 작품접수 일정은 공지사항을 통해 안내드릴 예정입니다.</p>
   </section>
 
   <section class="hosts">
@@ -305,11 +122,10 @@ footer { padding: 22px 18px 30px; text-align: center; color: var(--muted); backg
     </div>
   </section>
 </main>
-
 <footer>
-  Copyright © KOSAC since 2017. All rights reserved.
+  <span>대한민국 대학생 광고대회 KOSAC</span>
+  <a href="./index.html#contact">사무국 연락처</a>
 </footer>
-
 <div class="modal" id="noticeModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
   <div class="modal-panel">
     <div class="modal-head">
@@ -334,207 +150,5 @@ footer { padding: 22px 18px 30px; text-align: center; color: var(--muted); backg
     </div>
   </div>
 </div>
-
-<script>
-const menuToggle=document.getElementById('menuToggle');
-const mainMenu=document.getElementById('mainMenu');
-
-if(menuToggle && mainMenu){
-  menuToggle.addEventListener('click',()=>{
-    const open=mainMenu.classList.toggle('open');
-    menuToggle.setAttribute('aria-expanded',String(open));
-  });
-
-  mainMenu.querySelectorAll('a').forEach(a=>{
-    a.addEventListener('click',()=>{
-      mainMenu.classList.remove('open');
-      menuToggle.setAttribute('aria-expanded','false');
-    });
-  });
-
-  document.addEventListener('click',e=>{
-    if(window.innerWidth<=950 && !mainMenu.contains(e.target) && !menuToggle.contains(e.target)){
-      mainMenu.classList.remove('open');
-      menuToggle.setAttribute('aria-expanded','false');
-    }
-  });
-}
-
-const CFG=window.KOSAC_CONFIG||{};
-const configured=
-  CFG.SUPABASE_URL &&
-  !CFG.SUPABASE_URL.includes('YOUR_PROJECT') &&
-  CFG.SUPABASE_ANON_KEY &&
-  !CFG.SUPABASE_ANON_KEY.includes('YOUR_SUPABASE');
-
-const setupWarning=document.getElementById('setupWarning');
-const noticeBoard=document.getElementById('noticeBoard');
-const noticeModal=document.getElementById('noticeModal');
-const modalTitle=document.getElementById('modalTitle');
-const modalCategory=document.getElementById('modalCategory');
-const modalDate=document.getElementById('modalDate');
-const modalBody=document.getElementById('modalBody');
-const modalActions=document.getElementById('modalActions');
-const modalFile=document.getElementById('modalFile');
-const modalLink=document.getElementById('modalLink');
-const closeModal=document.getElementById('closeModal');
-const phone=document.getElementById('phone');
-const fax=document.getElementById('fax');
-const email=document.getElementById('email');
-const address=document.getElementById('address');
-
-let sb=null;
-let notices=[];
-let activeNotice=null;
-
-try {
-  if(configured && window.supabase){
-    sb=window.supabase.createClient(CFG.SUPABASE_URL,CFG.SUPABASE_ANON_KEY);
-  }
-} catch {
-  // The public fallback is available when client initialization fails.
-}
-
-function esc(s){
-  return String(s??'').replace(/[&<>"']/g,m=>({
-    '&':'&amp;',
-    '<':'&lt;',
-    '>':'&gt;',
-    '"':'&quot;',
-    "'":'&#039;'
-  }[m]));
-}
-
-function formatDate(d){
-  return d ? d.replaceAll('-','.') : '';
-}
-
-async function load(){
-  if(!sb){
-    loadFallback();
-    return;
-  }
-
-  const [settingsRes,noticeRes]=await Promise.all([
-    sb.from('site_settings').select('*').eq('id',1).single(),
-    sb.from('notices')
-      .select('*')
-      .eq('published',true)
-      .order('pinned',{ascending:false})
-      .order('published_at',{ascending:false})
-      .order('created_at',{ascending:false})
-  ]);
-
-  if(settingsRes.data){
-    const s=settingsRes.data;
-    if(s.contact_phone) phone.textContent=s.contact_phone;
-    if(s.contact_fax) fax.textContent=s.contact_fax;
-    if(s.contact_email) email.textContent=s.contact_email;
-    if(s.contact_address) address.textContent=s.contact_address;
-  }
-
-  if(noticeRes.error){
-    loadFallback();
-    return;
-  }
-
-  notices=noticeRes.data||[];
-  renderNotices();
-}
-
-function loadFallback(){
-  setupWarning.hidden=false;
-  notices=[
-    {
-      category:'공지',
-      title:'2027 대한민국 대학생 광고대회(KOSAC) 임시 홈페이지 안내',
-      body:'KOSAC 홈페이지 개편 및 클라우드 이전 준비에 따라 임시 홈페이지를 운영합니다. 주요 안내는 본 페이지를 통해 공지됩니다.',
-      published_at:'2026-10-02'
-    },
-    {
-      category:'대회',
-      title:'2027 KOSAC 시행요강 및 작품접수 안내 예정',
-      body:'2027 KOSAC 시행요강과 작품접수 일정은 추후 공지사항을 통해 안내드릴 예정입니다.',
-      published_at:'2026-10-01'
-    }
-  ];
-  renderNotices();
-}
-
-function renderNotices(){
-  noticeBoard.innerHTML='';
-
-  if(!notices.length){
-    noticeBoard.innerHTML='<div class="empty">등록된 공지사항이 없습니다.</div>';
-    return;
-  }
-
-  notices.forEach(n=>{
-    const row=document.createElement('button');
-    row.className='notice-row';
-    row.type='button';
-    row.innerHTML=`
-      <span class="notice-title">${esc(n.title)}</span>
-      <span class="notice-date">${esc(formatDate(n.published_at))}</span>
-    `;
-    row.addEventListener('click',()=>openNotice(n,row));
-    noticeBoard.appendChild(row);
-  });
-}
-
-function openNotice(n,row){
-  activeNotice=row;
-  modalTitle.textContent=n.title||'';
-  modalCategory.textContent=n.category||'공지';
-  modalDate.textContent=formatDate(n.published_at||'');
-  modalBody.textContent=n.body||'';
-
-  let hasAction=false;
-
-  if(n.attachment_url){
-    modalFile.href=n.attachment_url;
-    modalFile.textContent=n.attachment_name
-      ? `첨부파일 다운로드 · ${n.attachment_name}`
-      : '첨부파일 다운로드';
-    modalFile.style.display='inline-flex';
-    hasAction=true;
-  }else{
-    modalFile.removeAttribute('href');
-    modalFile.style.display='none';
-  }
-
-  if(n.link_url){
-    modalLink.href=n.link_url;
-    modalLink.style.display='inline-flex';
-    hasAction=true;
-  }else{
-    modalLink.removeAttribute('href');
-    modalLink.style.display='none';
-  }
-
-  modalActions.classList.toggle('show',hasAction);
-
-  noticeModal.classList.add('show');
-  document.body.style.overflow='hidden';
-  closeModal.focus();
-}
-
-function closeNoticeModal(){
-  noticeModal.classList.remove('show');
-  document.body.style.overflow='';
-  activeNotice?.focus();
-  activeNotice=null;
-}
-
-closeModal.addEventListener('click',closeNoticeModal);
-noticeModal.addEventListener('click',e=>{
-  if(e.target===noticeModal) closeNoticeModal();
-});
-document.addEventListener('keydown',e=>{
-  if(e.key==='Escape') closeNoticeModal();
-});
-
-load().catch(loadFallback);
-</script>
 </body>
 </html>
