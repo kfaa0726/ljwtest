@@ -2,7 +2,7 @@
 window.KosacContent=(()=>{
   const origin=location.href;
   const validUrl=value=>{
-    if(!value || !value.trim())return '';
+    if(typeof value!=='string' || !value.trim())return '';
     try{
       const url=new URL(value,origin);
       return ['https:','http:'].includes(url.protocol) &&
@@ -70,6 +70,9 @@ window.KosacContent=(()=>{
     if(settings?.data?.about_text)values.about_lead=settings.data.about_text;
     for(const row of pages.data||[])Object.assign(values,row.content);
     window.KosacContent.apply(document,values);
+    const collection=page==='index'?'gallery':page;
+    const items=window.KosacCollections?.publishedItems(collection,values);
+    if(items)window.KosacCollections.render(document,page,items);
     if(settings?.data){
       for(const node of document.querySelectorAll('[data-contact]')){
         const value=settings.data['contact_'+node.dataset.contact];

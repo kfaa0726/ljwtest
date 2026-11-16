@@ -211,3 +211,7 @@ footer a { color: var(--blue); margin-left: 12px; }
 }
 
 img[hidden] { display: none !important; }
+
+.gallery-description { white-space: pre-line; padding: 0 12px 10px; margin: 0; font-size: 13px; color: var(--muted); }
+.sponsor-description { white-space: pre-line; }
+.sponsor-material img + img { margin-top: 12px; }

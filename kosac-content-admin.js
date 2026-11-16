@@ -2,13 +2,25 @@
 window.KosacContentAdmin=(()=>{
   'use strict';
   const defaults=window.KOSAC_CONTENT_DEFAULTS;
+  const collections=window.KosacCollections;
   const state={client:null,user:null,ready:false,pending:null,pages:{},rows:{},dirty:new Set(),busy:false,bound:false};
   const $=id=>document.getElementById(id);
   const owns=(o,k)=>Object.prototype.hasOwnProperty.call(o,k);
   function status(text,error=false){$('cmsStatus').textContent=text;$('cmsStatus').classList.toggle('cms-error',error);}
   function rowSlug(page){return page==='guidelines'?'guidelines':'about';}
   function page(){return $('cmsPage').value;}
-  function buttons(){const disabled=!state.ready||state.busy;['cmsSave','cmsReload','cmsPreview','cmsPage','cmsGroup','cmsSearch'].forEach(id=>$(id).disabled=disabled);$('cmsFields').querySelectorAll('input,textarea').forEach(el=>el.disabled=disabled);}
+  function buttons(){
+    const disabled=!state.ready||state.busy;
+    ['cmsSave','cmsReload','cmsPreview','cmsPage','cmsGroup'].forEach(id=>$(id).disabled=disabled);
+    $('cmsSearch').disabled=disabled||$('cmsGroup').value==='collection';
+    for(const field of $('cmsFields').querySelectorAll('input,textarea,button')){
+      if(disabled){
+        if(!field.disabled){field.disabled=true;field.dataset.disabledByCms='true';}
+      }else if(field.dataset.disabledByCms){
+        field.disabled=false;delete field.dataset.disabledByCms;
+      }
+    }
+  }
   function groups(){
     const select=$('cmsGroup');select.replaceChildren();
     for(const group of defaults[page()].groups){const option=document.createElement('option');option.value=group.id;option.textContent=group.title;select.append(option);}
@@ -17,7 +29,19 @@ window.KosacContentAdmin=(()=>{
   function render(){
     const current=page(),draft=state.pages[current]?.draft;if(!draft)return;
     const query=$('cmsSearch').value.trim().toLowerCase(), group=$('cmsGroup').value;
-    const fields=defaults[current].fields.filter(f=>query?(f.label+' '+draft[f.key]).toLowerCase().includes(query):f.group===group);
+    const fields=defaults[current].fields.filter(f=>query&&group!=='collection'?(f.label+' '+draft[f.key]).toLowerCase().includes(query):f.group===group);
+    $('cmsSearch').disabled=group==='collection';
+    $('cmsPreviewBox').hidden=true;
+    if(group==='collection'){
+      const record=state.pages[current];
+      window.KosacCollectionAdmin.render($('cmsFields'),current,record,()=>{
+        record.listDirty=true;
+        state.dirty.add(current);
+        status('저장하지 않은 변경사항이 있습니다. 아래 저장 버튼을 눌러 반영하세요.');
+      },message=>status(message,true));
+      $('cmsCount').textContent='추가·수정·삭제·순서 변경은 저장 후 홈페이지에 반영됩니다.';
+      return;
+    }
     $('cmsFields').replaceChildren();
     for(const field of fields){
       const wrap=document.createElement('div');wrap.className='field cms-field';
@@ -77,6 +101,16 @@ window.KosacContentAdmin=(()=>{
         if(!pages.data || pages.data.length!==2)throw new Error('페이지 초기 데이터가 없습니다.');
         const next={};
         state.rows=Object.fromEntries(pages.data.map(row=>[row.slug,row]));
+        const collectionEntries=await Promise.all([...collections.supported].map(async key=>{
+          const values=state.rows.about.content||{};
+          const saved=collections.publishedItems(key,values);
+          if(saved)return [key,saved];
+          const response=await fetch('./'+key+'.html',{cache:'no-store'});
+          if(!response.ok)throw Error(defaults[key].title+' 초기 자료를 불러올 수 없습니다.');
+          const doc=new DOMParser().parseFromString(await response.text(),'text/html');
+          return [key,collections.legacyItems(key,doc,values)];
+        }));
+        const items=Object.fromEntries(collectionEntries);
         for(const key of Object.keys(defaults)){
           const row=state.rows[rowSlug(key)];
           if(!row)throw new Error('페이지 초기 데이터가 없습니다.');
@@ -86,7 +120,7 @@ window.KosacContentAdmin=(()=>{
             if(field.key==='about_lead'&&legacy.data?.about_text)draft[field.key]=legacy.data.about_text;
             if(owns(row.content||{},field.key)&&typeof row.content[field.key]==='string')draft[field.key]=row.content[field.key];
           }
-          next[key]={draft,files:new Map(),uploads:new Map()};
+          next[key]={draft,files:new Map(),uploads:new Map(),items:items[key],listDirty:false};
         }
         state.pages=next;state.user=identity.user.id;state.ready=true;state.dirty.clear();groups();status('내용을 수정한 뒤 저장하면 홈페이지에 반영됩니다.');
       }catch(error){state.ready=false;status(failure(error),true);}finally{state.busy=false;state.pending=null;buttons();}
@@ -107,25 +141,47 @@ window.KosacContentAdmin=(()=>{
       }
       content[field.key]=value;
     }
+    try{
+      if(record.listDirty){
+        for(const item of record.items){
+          if(!item.title.trim())throw Error('각 항목의 제목을 입력해 주세요.');
+          for(const image of item.images){
+            const selected=record.files.has(collections.imageKey(item,image));
+            if(image.url.trim()&&!selected&&!window.KosacContent.validUrl(image.url))throw Error(item.title+'의 이미지 주소를 확인해 주세요.');
+          }
+          if(current==='gallery'&&item.published&&!item.images.some(image=>image.url.trim()||record.files.has(collections.imageKey(item,image)))){
+            throw Error(item.title+'의 사진을 등록해 주세요.');
+          }
+          for(const link of item.links){
+            if(!window.KosacContent.validUrl(link.url))throw Error(item.title+'의 관련 링크 주소를 확인하거나 빈 링크를 삭제해 주세요.');
+          }
+        }
+      }
+    }catch(error){status(error.message,true);return;}
     state.busy=true;buttons();status('저장 중입니다.');
     try{
       const bucket=state.client.storage.from('kosac-files');
       for(const [key,file] of record.files){
-        if(record.uploads.has(key)){content[key]=record.uploads.get(key);continue;}
+        if(record.uploads.has(key))continue;
         const ext={'image/jpeg':'jpg','image/png':'png','image/webp':'webp','image/gif':'gif'}[file.type];
         const path='notices/site-'+crypto.randomUUID()+'.'+ext;
         const {error}=await bucket.upload(path,file,{contentType:file.type});
         if(error)throw error;
-        content[key]=bucket.getPublicUrl(path).data.publicUrl;
-        record.uploads.set(key,content[key]);
+        record.uploads.set(key,bucket.getPublicUrl(path).data.publicUrl);
       }
+      const media=(record.items||[]).map(item=>({...item,images:item.images.map(image=>({
+        ...image,url:record.uploads.get(collections.imageKey(item,image))||image.url
+      }))}));
+      if(record.listDirty)collections.storeItems(current,media,content);
+      for(const [key,url] of record.uploads)if(!key.includes('/'))content[key]=url;
       if(new TextEncoder().encode(JSON.stringify(content)).length>250000)throw new Error('저장할 메뉴 내용이 너무 깁니다. 내용을 줄여 주세요.');
       const res=await state.client.from('kosac_page_content').update({content}).eq('slug',slug).eq('version',row.version).select('version,updated_at');
       if(res.error)throw res.error;
       if(res.data?.length!==1)throw new Error('다른 창에서 내용이 변경되었거나 수정 권한이 만료되었습니다. 최신 내용을 불러온 뒤 다시 저장해 주세요.');
       row.version=res.data[0].version;
       row.content=content;
-      for(const key of record.files.keys())record.draft[key]=content[key];
+      for(const key of record.files.keys())if(!key.includes('/'))record.draft[key]=content[key];
+      if(record.listDirty){record.items=media;record.listDirty=false;}
       record.files.clear();
       record.uploads.clear();
       state.dirty.delete(current);render();
@@ -147,14 +203,22 @@ window.KosacContentAdmin=(()=>{
       doc.querySelectorAll('script').forEach(x=>x.remove());
       const values={...state.rows.about.content,...state.rows.guidelines.content,...state.pages[current].draft};
       window.KosacContent.apply(doc,values);
+      const images=new Map();
       for(const [key,file] of state.pages[current].files){
         const url=await new Promise((resolve,reject)=>{
           const r=new FileReader();r.onload=()=>resolve(r.result);r.onerror=reject;r.readAsDataURL(file);
         });
+        if(key.includes('/')){images.set(key,url);continue;}
         for(const node of doc.querySelectorAll('[data-edit-src],[data-edit-srcset]')){
           if(node.dataset.editSrc===key){node.src=url;node.hidden=false;}
           if(node.dataset.editSrcset===key)node.srcset=url;
         }
+      }
+      if(collections.supported.has(current)){
+        collections.render(doc,current,state.pages[current].items,{preview:true,images});
+      }else if(current==='index'){
+        const gallery=collections.publishedItems('gallery',values);
+        if(gallery)collections.render(doc,current,gallery,{preview:true});
       }
       doc.querySelectorAll('a').forEach(a=>a.removeAttribute('href'));
       const policy=doc.createElement('meta');policy.httpEquiv='Content-Security-Policy';
@@ -169,7 +233,7 @@ window.KosacContentAdmin=(()=>{
     for(const [key,props] of Object.entries(defaults)){
       const option=document.createElement('option');option.value=key;option.textContent=props.title;$('cmsPage').append(option);
     }
-    $('cmsPage').addEventListener('change',groups);$('cmsGroup').addEventListener('change',render);$('cmsSearch').addEventListener('input',render);
+    $('cmsPage').addEventListener('change',groups);$('cmsGroup').addEventListener('change',()=>{$('cmsSearch').value='';render();});$('cmsSearch').addEventListener('input',render);
     $('cmsSave').addEventListener('click',save);$('cmsPreview').addEventListener('click',preview);
     $('cmsReload').addEventListener('click',()=>{if(state.dirty.size&&!confirm('저장하지 않은 페이지 변경사항을 버리고 다시 불러올까요?'))return;load(true);});
     window.addEventListener('beforeunload',event=>{if(state.dirty.size){event.preventDefault();event.returnValue='';}});
